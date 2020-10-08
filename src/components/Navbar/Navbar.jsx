@@ -1,24 +1,24 @@
 import React from "react";
-import c from "../../css/Navbar.module.css";
+import c from "./Navbar.module.css";
 
 function Navbar() {
   return (
     <nav className={ c.nav }>
       <div className={ c.nav__content }>
         <div className={`${c.nav__item} ${c.nav__nolast}`}>
-          <a href="/">Profile</a>
+          <a href="/profile">Profile</a>
         </div>
         <div className={`${c.nav__item} ${c.nav__nolast}`}>
-          <a href="/">Messages</a>
+          <a href="/dialogs">Messages</a>
         </div>
         <div className={`${c.nav__item} ${c.nav__nolast}`}>
-          <a href="/">News</a>
+          <a href="/news">News</a>
         </div>
         <div className={`${c.nav__item} ${c.nav__nolast}`}>
-          <a href="/">Music</a>
+          <a href="/music">Music</a>
         </div>
         <div className={ c.nav__item }>
-          <a href="/">Settings</a>
+          <a href="/settings">Settings</a>
         </div>
       </div>
     </nav>

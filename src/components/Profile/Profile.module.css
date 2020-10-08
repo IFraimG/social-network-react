@@ -1,11 +1,23 @@
-.content {
-  grid-area: content;
-  /* background-color: #000; */
-  /* color: #fff; */
-}
-
 .poster img {
   width: 100%;
   height: 150px;
   object-fit: cover;
+}
+
+.info {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+.info__title {
+  margin-left: 30px;
+}
+
+.info__image {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
 }

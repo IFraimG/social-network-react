@@ -1,5 +1,5 @@
 import React from "react";
-import c from "../../css/Header.module.css";
+import c from "./Header.module.css";
 import logo from "../../img/logo64x64.png"
 
 function Header() {

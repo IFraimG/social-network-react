@@ -1,5 +1,6 @@
 
 .nav {
+  margin-right: 50px;
   max-height: 310px;
   grid-area: nav;
   /* background-color: burlywood; */
