@@ -11,6 +11,19 @@
   min-height: 100px;
 }
 
+.post__title {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.post__name {
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #000;
+}
+
 .post__image {
   width: 64px;
   height: 64px;

@@ -4,6 +4,7 @@ import c from "./CreatePost.module.css";
 function CreatePost(props) {
   return (
     <div className={ c.createpost }>
+      <h1>New post</h1>
       <div className={ c.createpost__content }>
         <div className={ c.createpost__field }>
             <textarea placeholder="Tell about us yourself..."></textarea>

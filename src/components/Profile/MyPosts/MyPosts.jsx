@@ -3,17 +3,14 @@ import Post from "./Post/Post";
 import CreatePost from "./Post/CreatePost";
 import c from "./MyPosts.module.css";
 
-function MyPosts() {
+function MyPosts(props) {
+  let post = props.posts.map(item => <Post key={ item.id } text={ item.text } likes={ item.likesCount } />)
   return (
     <div>
       <CreatePost />
       <div className={c.posts}>
-        <Post msg="helllllo1" />
-        <Post msg="helllllo2" />
-        <Post msg="helllllo3" />
-        <Post msg="helllllo4" />
-        <Post msg="helllllo5" />
-        <Post msg="helllllo6" />
+        <h1>My posts</h1>
+        { post }
       </div>
     </div>
   );
