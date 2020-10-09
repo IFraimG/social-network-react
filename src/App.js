@@ -4,6 +4,9 @@ import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
 import Profile from "./components/Profile/Profile"
 import Dialog from "./components/Dialogs/Dialog"
+import Settings from "./components/Settings/Settings"
+import Music from "./components/Music/Music"
+import News from "./components/News/News"
 import './App.css';
 
 function App(props) {
@@ -12,10 +15,12 @@ function App(props) {
       <div className="app-wrapper">
         <Header />
         <Navbar />
-        {/* <Profile /> */}
         <div className="app-wrapper-content">
-          <Route path="/dialogs" component={ Dialog } />
-          <Route path="/profile" component={ Profile } />
+          <Route exact path="/dialogs" component={ Dialog } />
+          <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/settings" component={ Settings } />
+          <Route exact path="/news" component={ News } />
+          <Route exact path="/music" component={ Music } />
         </div>  
       </div>
     </BrowserRouter>

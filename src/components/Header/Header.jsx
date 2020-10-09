@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className={ c.header }>
       <img src={ logo } />
-      <a href="/" className={ c.header__title }>MyOcean</a>
+      <a href="/" className={ c.header__title }>MyOcean V2</a>
     </header>
   );
 }

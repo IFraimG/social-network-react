@@ -1,0 +1,47 @@
+.createpost {
+  margin: 50px 0;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 40px;
+}
+
+.createpost__content textarea {
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  width: 400px;
+  min-height: 100px;
+  overflow: hidden;
+  border-color: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.createpost__content textarea::placeholder {
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+.createpost__content textarea:active,
+.createpost__content textarea:focus, button:focus, button:active {
+  outline: none;
+}
+
+.createpost__rules {
+  margin-top: 20px;
+}
+
+.createpost__rules button {
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-size: 16px;
+  border-radius: 24px;
+  padding: 10px 20px;
+  background-color: rgb(53, 170, 79);
+  transition: 0.1s ease-in-out;
+}
+
+.createpost__rules button:hover {
+  background-color: #fff;
+  border-color: rgb(53, 170, 79);
+  color: rgb(53, 170, 79);
+}
