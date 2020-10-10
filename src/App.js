@@ -22,7 +22,7 @@ function App(props) {
         </div>
         <div className="app-wrapper-content">
           <Route exact path="/" render={ () => <Home /> } />
-          <Route exact path="/dialogs" render={ () => <Dialog users={ props.store.getState.profilePage.users } messages={ props.store.getState.dialogsPage.messages } editMessage={ props.store.editMessage.bind(props.store) } msgValue={ props.store.getState.dialogsPage.msgValue } store={ props.store } /> } />
+          <Route exact path="/dialogs" render={ () => <Dialog dispatch={ props.store.dispatch.bind(props.store) } users={ props.store.getState.profilePage.users } messages={ props.store.getState.dialogsPage.messages } msgValue={ props.store.getState.dialogsPage.msgValue } /> } />
           <Route path="/profile" render={ () => <Profile store={ props.store } /> } />
           <Route path="/settings" render={ () => <Settings /> } />
           <Route path="/news" render={ () => <News /> } />

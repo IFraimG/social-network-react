@@ -1,15 +1,20 @@
 import React, { useRef } from "react";
 import c from "./CreatePost.module.css";
+import { addPostActionCreator, updateNewPostActionCreator } from "../../../../redux/state"
 
 function CreatePost(props) {
   let postElement = useRef(null)
 
   let createPost = () => {
-    if (postElement.current.value) props.addPost(postElement.current.value)
+    if (postElement.current.value) {
+      let action = addPostActionCreator()
+      props.dispatch(action)
+    }
   }
 
   let changePost = () => {
-    props.updateNewPost(postElement.current.value)
+    let action = updateNewPostActionCreator(postElement.current.value)
+    props.dispatch(action)
   }
 
   return (
