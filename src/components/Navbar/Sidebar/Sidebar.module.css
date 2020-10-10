@@ -1,12 +1,13 @@
 .sidebar {
   max-width: 200px;
-  grid-area: sidebar;
-  margin-top: 10px;
+  margin-top: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .sidebar h2 {
   text-align: center;
   padding-bottom: 10px;
+  font-size: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 

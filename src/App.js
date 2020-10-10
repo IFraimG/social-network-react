@@ -16,12 +16,14 @@ function App(props) {
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Navbar />
-        <Sidebar friends={ props.state.sidebar.friends } />
+        <div className="app-wrapper-nav">
+          <Navbar />
+          <Sidebar store={ props.store } />
+        </div>
         <div className="app-wrapper-content">
           <Route exact path="/" render={ () => <Home /> } />
-          <Route exact path="/dialogs" render={ () => <Dialog sendMessage={ props.sendMessage } users={ props.state.profilePage.users } messages={ props.state.dialogsPage.messages } /> } />
-          <Route path="/profile" render={ () => <Profile addPosts={ props.addPosts } posts={ props.state.profilePage.posts } /> } />
+          <Route exact path="/dialogs" render={ () => <Dialog users={ props.store.getState.profilePage.users } messages={ props.store.getState.dialogsPage.messages } editMessage={ props.store.editMessage.bind(props.store) } msgValue={ props.store.getState.dialogsPage.msgValue } store={ props.store } /> } />
+          <Route path="/profile" render={ () => <Profile store={ props.store } /> } />
           <Route path="/settings" render={ () => <Settings /> } />
           <Route path="/news" render={ () => <News /> } />
           <Route path="/music" render={ () => <Music /> } />

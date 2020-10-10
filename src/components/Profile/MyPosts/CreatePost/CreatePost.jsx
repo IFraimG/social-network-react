@@ -2,12 +2,14 @@ import React, { useRef } from "react";
 import c from "./CreatePost.module.css";
 
 function CreatePost(props) {
-
   let postElement = useRef(null)
 
   let createPost = () => {
-    if (postElement.current.value) props.addPosts(postElement.current.value)
-    postElement.current.value = ""
+    if (postElement.current.value) props.addPost(postElement.current.value)
+  }
+
+  let changePost = () => {
+    props.updateNewPost(postElement.current.value)
   }
 
   return (
@@ -15,7 +17,7 @@ function CreatePost(props) {
       <h1>New post</h1>
       <div className={ c.createpost__content }>
         <div className={ c.createpost__field }>
-            <textarea ref={ postElement } placeholder="Tell about us yourself..."></textarea>
+            <textarea ref={ postElement } onChange={ changePost } value={ props.textValue } placeholder="Tell about us yourself..." />
         </div>
         <div className={ c.createpost__rules }>
           <button onClick={ createPost }>Publish a post</button>

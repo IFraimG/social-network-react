@@ -13,8 +13,11 @@ function Dialog(props) {
   let message = props.messages.map(message => <Message key={ message.message } message={ message.message } />)
 
   let sendMessage = () => {
-    props.sendMessage(messageElement.current.value)
-    messageElement.current.value = ""
+    props.store.sendMessage()
+  }
+
+  let editMessage = () => {
+    props.editMessage(messageElement.current.value)
   }
 
   return (
@@ -30,7 +33,7 @@ function Dialog(props) {
             { message }
           </div>
           <div className={ c.dialogs__input }>
-            <textarea ref={ messageElement } placeholder="Enter your message..." type="text">
+            <textarea ref={ messageElement } onChange={ editMessage } value={ props.msgValue } placeholder="Enter your message..." type="text">
             </textarea>
             <button onClick={ sendMessage }>Push</button>
           </div>

@@ -7,7 +7,7 @@ function Profile(props) {
   return (
     <main>
       <ProfileInfo />
-      <MyPosts addPosts={ props.addPosts } posts={ props.posts } />
+      <MyPosts store={ props.store } />
     </main>
   );
 }

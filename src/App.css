@@ -1,13 +1,12 @@
 .app-wrapper {
   display: grid;
-  grid-template-rows: 70px 1fr 8fr;
+  grid-template-rows: 70px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
   /* align-items: center; */
   grid-template-areas:
     "header header"
-    "nav content"
-    "sidebar content";
+    "nav content";
   max-width: 100%;
   padding: 0 40px;
   margin: 0 auto;
@@ -15,6 +14,10 @@
 
 .app-wrapper-content {
   grid-area: content;
+}
+
+.app-wrapper-nav {
+  grid-area: nav;
 }
 
 @media (max-width: 1107px) {
