@@ -1,1 +1,1 @@
-### MyOcean V2, написанная на React !
+### MyOcean V2

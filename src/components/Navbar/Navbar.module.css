@@ -42,3 +42,13 @@
 .nav__active {
   border-bottom: 1px solid #000;
 }
+
+@media (max-width: 1107px) {
+  .nav {
+    max-width: 100%;
+  }
+  .nav__content {
+    flex-direction: row;
+    
+  }
+}

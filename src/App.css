@@ -1,12 +1,13 @@
 .app-wrapper {
   display: grid;
-  grid-template-rows: 70px 1fr;
+  grid-template-rows: 70px 1fr 8fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
   /* align-items: center; */
   grid-template-areas:
     "header header"
-    "nav content";
+    "nav content"
+    "sidebar content";
   max-width: 100%;
   padding: 0 40px;
   margin: 0 auto;
@@ -14,4 +15,16 @@
 
 .app-wrapper-content {
   grid-area: content;
+}
+
+@media (max-width: 1107px) {
+  .app-wrapper {
+    grid-template-areas:
+    "header header"
+    "nav nav"
+    "content content";
+    grid-template-columns: none;
+    grid-template-rows: none;
+    align-items: center;
+  }
 }

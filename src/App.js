@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from "react-router-dom"
 import Home from "./components/Home/Home"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
+import Sidebar from "./components/Navbar/Sidebar/Sidebar"
 import Profile from "./components/Profile/Profile"
 import Dialog from "./components/Dialogs/Dialog"
 import Settings from "./components/Settings/Settings"
@@ -16,10 +17,11 @@ function App(props) {
       <div className="app-wrapper">
         <Header />
         <Navbar />
+        <Sidebar friends={ props.state.sidebar.friends } />
         <div className="app-wrapper-content">
           <Route exact path="/" render={ () => <Home /> } />
-          <Route exact path="/dialogs" render={ () => <Dialog users={ props.users } messages={ props.messages } /> } />
-          <Route path="/profile" render={ () => <Profile posts={ props.posts } /> } />
+          <Route exact path="/dialogs" render={ () => <Dialog sendMessage={ props.sendMessage } users={ props.state.profilePage.users } messages={ props.state.dialogsPage.messages } /> } />
+          <Route path="/profile" render={ () => <Profile addPosts={ props.addPosts } posts={ props.state.profilePage.posts } /> } />
           <Route path="/settings" render={ () => <Settings /> } />
           <Route path="/news" render={ () => <News /> } />
           <Route path="/music" render={ () => <Music /> } />

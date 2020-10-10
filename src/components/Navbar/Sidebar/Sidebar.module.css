@@ -1,0 +1,32 @@
+.sidebar {
+  max-width: 200px;
+  grid-area: sidebar;
+  margin-top: 10px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.noimage {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: green;
+}
+
+.friend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+@media (max-width: 1107px) {
+  .sidebar {
+    display: none;
+  }
+}
