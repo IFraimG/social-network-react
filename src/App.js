@@ -17,12 +17,12 @@ function App(props) {
       <Header />
       <div className="app-wrapper-nav">
         <Navbar />
-        <Sidebar friends={ props.state.sidebar.friends } />
+        <Sidebar />
       </div>
       <div className="app-wrapper-content">
         <Route exact path="/" render={ () => <Home /> } />
-        <Route path="/dialogs" render={ () => <DialogContainer store={ props.store } /> } />
-        <Route path="/profile" render={ () => <Profile store={ props.store } /> } />
+        <Route path="/dialogs" render={ () => <DialogContainer /> } />
+        <Route path="/profile" render={ () => <Profile /> } />
         <Route path="/settings" render={ () => <Settings /> } />
         <Route path="/news" render={ () => <News /> } />
         <Route path="/music" render={ () => <Music /> } />
