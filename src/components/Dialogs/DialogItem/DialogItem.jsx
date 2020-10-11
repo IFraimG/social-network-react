@@ -5,7 +5,7 @@ import c from "../Dialog.module.css";
 function DialogItem(props) {
   return (
     <div className={ c.dialogs__item }>
-      <NavLink to={ "/dialogs/" + props.id } className={ c.dialogs__item + " " + c.dialogs__active }>
+      <NavLink to={ "/dialogs/" + props.id } className={ c.dialogs__item }>
         { props.name }
       </NavLink>
     </div>

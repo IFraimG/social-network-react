@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from "react-router-dom"
+import { Route } from "react-router-dom"
 import Home from "./components/Home/Home"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
@@ -13,23 +13,21 @@ import './App.css';
 
 function App(props) {
   return (
-    <BrowserRouter>
-      <div className="app-wrapper">
-        <Header />
-        <div className="app-wrapper-nav">
-          <Navbar />
-          <Sidebar store={ props.store } />
-        </div>
-        <div className="app-wrapper-content">
-          <Route exact path="/" render={ () => <Home /> } />
-          <Route exact path="/dialogs" render={ () => <Dialog dispatch={ props.store.dispatch.bind(props.store) } users={ props.store.getState.profilePage.users } messages={ props.store.getState.dialogsPage.messages } msgValue={ props.store.getState.dialogsPage.msgValue } /> } />
-          <Route path="/profile" render={ () => <Profile store={ props.store } /> } />
-          <Route path="/settings" render={ () => <Settings /> } />
-          <Route path="/news" render={ () => <News /> } />
-          <Route path="/music" render={ () => <Music /> } />
-        </div>  
+    <div className="app-wrapper">
+      <Header />
+      <div className="app-wrapper-nav">
+        <Navbar />
+        <Sidebar store={ props.store } />
       </div>
-    </BrowserRouter>
+      <div className="app-wrapper-content">
+        <Route exact path="/" render={ () => <Home /> } />
+        <Route path="/dialogs" render={ () => <Dialog dispatch={ props.store.dispatch.bind(props.store) } users={ props.store.getState.profilePage.users } messages={ props.store.getState.dialogsPage.messages } msgValue={ props.store.getState.dialogsPage.msgValue } /> } />
+        <Route path="/profile" render={ () => <Profile store={ props.store } /> } />
+        <Route path="/settings" render={ () => <Settings /> } />
+        <Route path="/news" render={ () => <News /> } />
+        <Route path="/music" render={ () => <Music /> } />
+      </div>  
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import c from "./CreatePost.module.css";
-import { addPostActionCreator, updateNewPostActionCreator } from "../../../../redux/state"
+import { addPostActionCreator, updateNewPostActionCreator } from "../../../../redux/profile-reducer"
 
 function CreatePost(props) {
   let postElement = useRef(null)
