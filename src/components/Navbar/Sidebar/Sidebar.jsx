@@ -3,7 +3,7 @@ import Friend from "./Friend/Friend"
 import c from "./Sidebar.module.css";
 
 function Sidebar(props) {
-  let friend = props.store.getState.sidebar.friends.map(friend => {
+  let friend = props.friends.map(friend => {
     return <Friend key={ friend.id } info={ friend } />
   })
 

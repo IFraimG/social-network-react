@@ -1,20 +1,16 @@
 import React, { useRef } from "react";
 import c from "./CreatePost.module.css";
-import { addPostActionCreator, updateNewPostActionCreator } from "../../../../redux/profile-reducer"
+// import { addPostActionCreator, updateNewPostActionCreator } from "../../../../redux/profile-reducer"
 
 function CreatePost(props) {
   let postElement = useRef(null)
 
   let createPost = () => {
-    if (postElement.current.value) {
-      let action = addPostActionCreator()
-      props.dispatch(action)
-    }
+    props.addPost(postElement.current.value)
   }
 
   let changePost = () => {
-    let action = updateNewPostActionCreator(postElement.current.value)
-    props.dispatch(action)
+    props.updateNewPost(postElement.current.value)
   }
 
   return (

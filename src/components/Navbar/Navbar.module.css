@@ -50,4 +50,9 @@
     flex-direction: row;
     
   }
+  .nav__nolast {
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: none;
+  }
+  
 }

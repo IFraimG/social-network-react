@@ -5,7 +5,7 @@ import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
 import Sidebar from "./components/Navbar/Sidebar/Sidebar"
 import Profile from "./components/Profile/Profile"
-import Dialog from "./components/Dialogs/Dialog"
+import DialogContainer from "./components/Dialogs/DialogContainer"
 import Settings from "./components/Settings/Settings"
 import Music from "./components/Music/Music"
 import News from "./components/News/News"
@@ -17,11 +17,11 @@ function App(props) {
       <Header />
       <div className="app-wrapper-nav">
         <Navbar />
-        <Sidebar store={ props.store } />
+        <Sidebar friends={ props.state.sidebar.friends } />
       </div>
       <div className="app-wrapper-content">
         <Route exact path="/" render={ () => <Home /> } />
-        <Route path="/dialogs" render={ () => <Dialog dispatch={ props.store.dispatch.bind(props.store) } users={ props.store.getState.profilePage.users } messages={ props.store.getState.dialogsPage.messages } msgValue={ props.store.getState.dialogsPage.msgValue } /> } />
+        <Route path="/dialogs" render={ () => <DialogContainer store={ props.store } /> } />
         <Route path="/profile" render={ () => <Profile store={ props.store } /> } />
         <Route path="/settings" render={ () => <Settings /> } />
         <Route path="/news" render={ () => <News /> } />

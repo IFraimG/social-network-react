@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import DialogItem from "./DialogItem/DialogItem"
 import Message from "./Message/Message"
 import c from "./Dialog.module.css";
-import { addMessageActionCreator, editMessageActionCreator } from "../../redux/dialogs-reducer"
 
 function Dialog(props) {
   let messageElement = useRef(null)
@@ -13,15 +12,8 @@ function Dialog(props) {
 
   let message = props.messages.map(message => <Message key={ message.message } message={ message.message } />)
 
-  let sendMessage = () => {
-    let action = addMessageActionCreator()
-    props.dispatch(action)
-  }
-
-  let editMessage = () => {
-    let action = editMessageActionCreator(messageElement.current.value)
-    props.dispatch(action)
-  }
+  let sendMessage = () => props.sendMessage()
+  let editMessage = () => props.editMessage(messageElement.current.value)
 
   return (
     <div className={ c.dialogs }>

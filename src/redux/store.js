@@ -45,7 +45,7 @@ let store = {
       ],
     },
   },
-  get getState() {
+  getState() {
     return this._state;
   },
   dispatch(action) {
