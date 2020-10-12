@@ -11,19 +11,19 @@ let stateInit = {
     },
   ],
   msgValue: "",
+  users: [
+    { id: 1, name: "Pushok1" },
+    { id: 2, name: "Pushok2" },
+  ],
 }
 
 function dialogsReducer(state = stateInit, action) {
   switch (action.type) {
     case ADD_MESSAGE:
       let newMessage = { id: 6, message: state.msgValue }
-      state.messages.push(newMessage)
-      state.msgValue = ""
-      return state;
-    case CHANGE_MESSAGE: 
-      state.msgValue = action.data;
-      return state;
-    default: return state;
+      return { ...state, messages: [...state.messages, newMessage], msgValue: "" }
+    case CHANGE_MESSAGE: return { ...state, msgValue: action.data }
+    default: return { ...state };
   }
 }
 

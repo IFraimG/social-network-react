@@ -3,9 +3,9 @@ import { Route } from "react-router-dom"
 import Home from "./components/Home/Home"
 import Header from "./components/Header/Header"
 import Navbar from "./components/Navbar/Navbar"
-import Sidebar from "./components/Navbar/Sidebar/Sidebar"
+import SuperSidebarContainer from "./components/Navbar/Sidebar/SidebarContainer"
 import Profile from "./components/Profile/Profile"
-import DialogContainer from "./components/Dialogs/DialogContainer"
+import SuperDialogsContainer from "./components/Dialogs/DialogContainer"
 import Settings from "./components/Settings/Settings"
 import Music from "./components/Music/Music"
 import News from "./components/News/News"
@@ -17,11 +17,11 @@ function App(props) {
       <Header />
       <div className="app-wrapper-nav">
         <Navbar />
-        <Sidebar />
+        <SuperSidebarContainer />
       </div>
       <div className="app-wrapper-content">
         <Route exact path="/" render={ () => <Home /> } />
-        <Route path="/dialogs" render={ () => <DialogContainer /> } />
+        <Route path="/dialogs" render={ () => <SuperDialogsContainer /> } />
         <Route path="/profile" render={ () => <Profile /> } />
         <Route path="/settings" render={ () => <Settings /> } />
         <Route path="/news" render={ () => <News /> } />

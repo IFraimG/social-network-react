@@ -1,34 +1,26 @@
-import React from "react";
 import Dialog from './Dialog';
 import { addMessageActionCreator, editMessageActionCreator } from "../../redux/dialogs-reducer";
-import StoreContext from "../../StoreContext";
+import { connect } from "react-redux"
 
-function DialogConainer(props) {
-  return (
-    <StoreContext.Consumer>
-      {
-        store => {
-          let sendMessage = () => {
-            let action = addMessageActionCreator();
-            store.dispatch(action);
-          };
-        
-          let editMessage = (text) => {
-            let action = editMessageActionCreator(text);
-            store.dispatch(action);
-          };
-
-          return <Dialog 
-            users={ store.getState().profilePage.users }
-            messages={ store.getState().dialogsPage.messages }
-            msgValue={ store.getState().dialogsPage.msgValue }
-            sendMessage={ sendMessage } 
-            editMessage={ editMessage } 
-          />
-        }
-      }
-    </StoreContext.Consumer>
-  )
+function mapStateToProps(state) {
+  return {
+    users: state.dialogsPage.users,
+    messages: state.dialogsPage.messages,
+    msgValue: state.dialogsPage.msgValue
+  }
 }
 
-export default DialogConainer;
+function mapDispatchToProps(dispatch) {
+  return {
+    sendMessage: () => {
+      dispatch(addMessageActionCreator())
+    },
+    editMessage: (text) => {
+      dispatch(editMessageActionCreator(text))
+    }
+  }
+}
+
+const SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialog)
+
+export default SuperDialogsContainer;
