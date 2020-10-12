@@ -18,6 +18,9 @@ function Navbar() {
         <NavLink to="/music" className={`${c.nav__item} ${c.nav__nolast}`}>
           <div>Music</div>
         </NavLink>
+        <NavLink to="/users" className={`${c.nav__item} ${c.nav__nolast}`}>
+          <div>Find users</div>
+        </NavLink>
         <NavLink to="/settings" className={ c.nav__item }>
           <div>Settings</div>
         </NavLink>
