@@ -1,6 +1,7 @@
 const ADD_POST = "ADD-POST"
 const GET_USER = "GET_USER"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
+const REFOLLOW_USER = "REFOLLOW_USER"
 
 let stateInit = {
   posts: [
@@ -23,6 +24,8 @@ function profileReducer(state = stateInit, action) {
       return { ...state, textValue: action.data };
     case GET_USER:
       return { ...state, profile: action.data }
+    case REFOLLOW_USER:
+      return { ...state, profile: { ...state.profile, isFollowed: !state.profile.isFollowed } }
     default: return { ...state };
   }
 }
@@ -30,5 +33,6 @@ function profileReducer(state = stateInit, action) {
 export const createPost = () => ({ type: ADD_POST })
 export const updateNewPost = data => ({ type: UPDATE_POST_TEXT, data: data})
 export const setUser = profile => ({ type: GET_USER, data: profile })
+export const refollowUser = () => ({ type: REFOLLOW_USER  })
 
 export default profileReducer;

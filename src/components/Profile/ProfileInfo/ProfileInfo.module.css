@@ -6,24 +6,45 @@
 }
 
 .info {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10fr 2fr;
+  grid-template-areas: 
+    "left follow"
+    "left follow";
   align-items: center;
   border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 20px;
 }
 
+.info__left {
+  grid-area: left;
+  display: grid;
+  justify-content: start;
+  grid-template-areas: "image title";
+}
+
 .info__title {
+  grid-area: title;
   margin-left: 30px;
 }
 
 .info__title h2 {
-    font-size: 32px;
+  font-size: 32px;
+}
+.info__logo {
+  grid-area: image;
 }
 
 .info__image {
-  width: 128px;
-  height: 128px;
+  min-width: 128px;
+  min-height: 128px;
+  max-width: 128px;
+  max-height: 128px;
   object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.info__follow {
+  grid-area: follow;
 }

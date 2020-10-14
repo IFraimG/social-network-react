@@ -23,7 +23,7 @@ function App() {
       <div className="app-wrapper-content">
         <Route exact path="/" render={ () => <Home /> } />
         <Route path="/dialogs" render={ () => <SuperDialogsContainer /> } />
-        <Route exact path="/profile/:id" component={ ProfileContainer } />
+        <Route path="/profile/:id" render={ () => <ProfileContainer /> } />
         <Route path="/settings" render={ () => <Settings /> } />
         <Route path="/news" render={ () => <News /> } />
         <Route path="/users" render={ () => <UsersContainer /> } />

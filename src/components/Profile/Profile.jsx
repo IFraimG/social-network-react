@@ -5,7 +5,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 function Profile(props) {
   return (
     <main>
-      <ProfileInfo profile={ props.profile } />
+      <ProfileInfo { ...props } profile={ props.profile } />
       <SuperPostsContainer />
     </main>
   );

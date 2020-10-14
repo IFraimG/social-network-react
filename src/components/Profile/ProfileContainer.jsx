@@ -2,7 +2,8 @@ import React from "react";
 import Profile from "./Profile";
 import axios from "axios"
 import { connect } from "react-redux"
-import { setUser } from "../../redux/profile-reducer"
+import { withRouter, Redirect } from "react-router-dom"
+import { setUser, refollowUser } from "../../redux/profile-reducer"
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -13,6 +14,9 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+    if (!this.props.match.params.id) {
+      return <Redirect to={{ pathname: "/" }} />
+    }
     return <Profile { ...this.props } profile={ this.props.profile } />
   } 
 }
@@ -23,4 +27,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { setUserData: setUser })(ProfileContainer);
+let urlDataComponent = withRouter(ProfileContainer)
+
+export default connect(mapStateToProps, { setUserData: setUser, refollowUser })(urlDataComponent);
