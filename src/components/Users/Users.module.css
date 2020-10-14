@@ -76,6 +76,11 @@ h1 {
   grid-area: location;
 }
 
+.user__link {
+  text-decoration: none;
+  color: #000;
+}
+
 .users__pages {
   display: flex;
   flex-wrap: wrap;

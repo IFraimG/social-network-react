@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
 import Loader from "../Loaders/Loader"
-import { refollowAC, setUsersAC, redirectPageAC, setTotalCountAC, setFullPagesAC, reloadingAC } from "../../redux/users-reducer"
+import { refollow, setUsers, editPage, setTotalCount, getFullPages, reloading } from "../../redux/users-reducer"
 import * as axios from "axios";
 
 class UsersContainer extends React.Component {
@@ -18,8 +18,10 @@ class UsersContainer extends React.Component {
   redirectToPage = (numPage, element) => {
     this.props.editPage(numPage)
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numPage}&count=${this.props.pageSize}`)
-      .then((res) => this.props.setUsers(res.data.items));
-    window.scrollBy({ top: element.current.getBoundingClientRect().top, behavior: "smooth" })
+      .then((res) => {
+        this.props.setUsers(res.data.items)
+        window.scrollBy({ top: element.current.getBoundingClientRect().top, behavior: "smooth" })
+      });
   }
 
   loadFullData = () => this.props.getFullPages()
@@ -55,15 +57,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    refollow: userID => dispatch(refollowAC(userID)),
-    setUsers: users => dispatch(setUsersAC(users)),
-    editPage: page => dispatch(redirectPageAC(page)),
-    setTotalCount: (totalCount) => dispatch(setTotalCountAC(totalCount)),
-    getFullPages: () => dispatch(setFullPagesAC()),
-    reloading: () => dispatch(reloadingAC())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, { refollow, setUsers, editPage, setTotalCount, getFullPages, reloading })(UsersContainer);

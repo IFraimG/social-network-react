@@ -37,11 +37,11 @@ function usersReducer(state = stateDefault, action) {
 	}
 }
 
-export const refollowAC = (userID) => ({ type: "REFOLLOW_USER", data: userID })
-export const setUsersAC = (usersData) => ({ type: "SET_USER", data: usersData })
-export const redirectPageAC = (currentPage) => ({ type: "EDIT_PAGE", data: currentPage })
-export const setTotalCountAC = (totalCount) => ({ type: "EDIT_TOTAL_COUNT", data: totalCount })
-export const setFullPagesAC = () => ({ type: "GET_FULL_PAGE" })
-export const reloadingAC = () => ({ type: "RELOAD_METHOD" })
+export const refollow = (userID) => ({ type: "REFOLLOW_USER", data: userID })
+export const setUsers = (usersData) => ({ type: "SET_USER", data: usersData })
+export const editPage = (currentPage) => ({ type: "EDIT_PAGE", data: currentPage })
+export const setTotalCount = (totalCount) => ({ type: "EDIT_TOTAL_COUNT", data: totalCount })
+export const getFullPages = () => ({ type: "GET_FULL_PAGE" })
+export const reloading = () => ({ type: "RELOAD_METHOD" })
 
 export default usersReducer;

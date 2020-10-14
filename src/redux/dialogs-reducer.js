@@ -27,11 +27,11 @@ function dialogsReducer(state = stateInit, action) {
   }
 }
 
-export function addMessageActionCreator() {
+export function sendMessage() {
   return { type: ADD_MESSAGE }
 }
 
-export function editMessageActionCreator(data) {
+export function editMessage(data) {
   return { type: CHANGE_MESSAGE, data: data }
 }
 

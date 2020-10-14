@@ -1,5 +1,5 @@
 import Dialog from './Dialog';
-import { addMessageActionCreator, editMessageActionCreator } from "../../redux/dialogs-reducer";
+import { sendMessage, editMessage } from "../../redux/dialogs-reducer";
 import { connect } from "react-redux"
 
 function mapStateToProps(state) {
@@ -10,17 +10,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    sendMessage: () => {
-      dispatch(addMessageActionCreator())
-    },
-    editMessage: (text) => {
-      dispatch(editMessageActionCreator(text))
-    }
-  }
-}
-
-const SuperDialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialog)
-
-export default SuperDialogsContainer;
+export default connect(mapStateToProps, { sendMessage, editMessage })(Dialog);

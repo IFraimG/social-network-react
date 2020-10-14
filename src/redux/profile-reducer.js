@@ -1,4 +1,5 @@
 const ADD_POST = "ADD-POST"
+const GET_USER = "GET_USER"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
 
 let stateInit = {
@@ -9,7 +10,8 @@ let stateInit = {
     { id: 4, text: "hellllo4", likesCount: 6 },
     { id: 5, text: "hellllo5", likesCount: 4 },
   ],
-  textValue: ""
+  textValue: "",
+  profile: {}
 }
 
 function profileReducer(state = stateInit, action) {
@@ -19,11 +21,14 @@ function profileReducer(state = stateInit, action) {
       return { ...state, posts: [...state.posts, newPost], textValue: "" };
     case UPDATE_POST_TEXT: 
       return { ...state, textValue: action.data };
+    case GET_USER:
+      return { ...state, profile: action.data }
     default: return { ...state };
   }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
-export const updateNewPostActionCreator = data => ({ type: UPDATE_POST_TEXT, data: data})
+export const createPost = () => ({ type: ADD_POST })
+export const updateNewPost = data => ({ type: UPDATE_POST_TEXT, data: data})
+export const setUser = profile => ({ type: GET_USER, data: profile })
 
 export default profileReducer;

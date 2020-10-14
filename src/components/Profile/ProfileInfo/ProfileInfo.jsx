@@ -1,7 +1,8 @@
 import React from "react";
 import c from "./ProfileInfo.module.css";
 
-function ProfileInfo() {
+function ProfileInfo(props) {
+  console.log(props);
   return (
     <div>
       <div className={c.poster}>

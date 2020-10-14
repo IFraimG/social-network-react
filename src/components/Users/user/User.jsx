@@ -1,11 +1,20 @@
 import React from "react";
+import { NavLink } from "react-router-dom"
 import styles from "../Users.module.css";
 import img from "../../../img/user.png"
 
 function User(props) {
   let isFollow = <button onClick={ () => props.refollow(props.item.id) }>Follow</button>
-  let isImage = <img src={ img } alt="" />
-  if (props.item.photos.small !== null) isImage = <img src={ props.item.photos.small } alt="" />
+  let isImage = (
+    <NavLink to={ "/profile/" + props.item.id }>
+      <img src={ img } alt="" />
+    </NavLink>
+  )
+  if (props.item.photos.small !== null) isImage = (
+    <NavLink to={ "/profile/" + props.item.id }>
+      <img src={ props.item.photos.small } alt="" />
+    </NavLink>
+  )
   if (!props.item.followed) isFollow = <button onClick={() => props.refollow(props.item.id)}>Unfollow</button>
   return (
     <div className={styles.user}>
@@ -15,7 +24,9 @@ function User(props) {
       </div>
       <div className={styles.user__right}>
         <div className={styles.user__title}>
-          <h2>{props.item.name}</h2>
+          <NavLink className={ styles.user__link } to={ "/profile/" + props.item.id }>
+            <h2>{props.item.name}</h2>
+          </NavLink>
           <p>{props.item.description}</p>
         </div>
         <div className={styles.user__location}>
