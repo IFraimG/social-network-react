@@ -2,13 +2,17 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 import c from "./Navbar.module.css";
 
-function Navbar() {
+function Navbar(props) {
+  let isProfile = ""
+  if (props.isAuth) isProfile = (
+    <NavLink to={"/profile/" + props.id} className={`${c.nav__item} ${c.nav__nolast}`}>
+      <div>Profile</div>
+    </NavLink>
+  )
   return (
     <nav className={ c.nav }>
       <div className={ c.nav__content }>
-        <NavLink to="/profile" className={`${c.nav__item} ${c.nav__nolast}`}>
-          <div>Profile</div>
-        </NavLink>
+        { isProfile }
         <NavLink to="/dialogs" className={`${c.nav__item} ${c.nav__nolast}`}>
           <div>Messages</div>
         </NavLink>

@@ -32,9 +32,6 @@ function ProfileInfo(props) {
             { description }
           </div>
         </div>
-        <div className={ c.info__follow }>
-          { !props.profile.isFollowed ? <button className="btn__green" onClick={ () => props.refollowUser() }>Подписаться</button> : <button className="btn__green" onClick={ () => props.refollowUser() }>Отписаться</button> }
-        </div>
       </div>
     </div>
   );

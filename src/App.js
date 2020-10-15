@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from "react-router-dom"
 import Home from "./components/Home/Home"
-import Header from "./components/Header/Header"
-import Navbar from "./components/Navbar/Navbar"
+import HeaderContainer from "./components/Header/HeaderContainer"
+import NavbarContainer from "./components/Navbar/NavbarContainer"
 import SuperSidebarContainer from "./components/Navbar/Sidebar/SidebarContainer"
 import SuperDialogsContainer from "./components/Dialogs/DialogContainer"
 import Settings from "./components/Settings/Settings"
@@ -15,9 +15,9 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 function App() {
   return (
     <div className="app-wrapper">
-      <Header />
+      <HeaderContainer />
       <div className="app-wrapper-nav">
-        <Navbar />
+        <NavbarContainer />
         <SuperSidebarContainer />
       </div>
       <div className="app-wrapper-content">

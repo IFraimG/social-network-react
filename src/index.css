@@ -34,3 +34,10 @@ code {
   border: 2px solid rgb(26, 75, 36);
   color: #fff;
 }
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+}

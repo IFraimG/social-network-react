@@ -3,23 +3,23 @@ import { connect } from "react-redux";
 import Users from "./Users";
 import Loader from "../Loaders/Loader"
 import { refollow, setUsers, editPage, setTotalCount, getFullPages, reloading } from "../../redux/users-reducer"
-import * as axios from "axios";
+import { usersAPI } from "../../api/api"
 
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.reloading()
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-      .then(res => {
-        this.props.setUsers(res.data.items)
-        this.props.setTotalCount(res.data.totalCount)
+    usersAPI.getPageUsers(this.props.currentPage, this.props.pageSize)
+      .then(data => {
+        this.props.setUsers(data.items)
+        this.props.setTotalCount(data.totalCount)
         this.props.reloading()
       });
   }
   redirectToPage = (numPage, element) => {
     this.props.editPage(numPage)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numPage}&count=${this.props.pageSize}`)
-      .then((res) => {
-        this.props.setUsers(res.data.items)
+    usersAPI.getPageUsers(numPage, this.props.pageSize)
+      .then(data => {
+        this.props.setUsers(data.items)
         window.scrollBy({ top: element.current.getBoundingClientRect().top, behavior: "smooth" })
       });
   }
@@ -32,15 +32,9 @@ class UsersContainer extends React.Component {
     return <React.Fragment>
       { loader }
       <Users 
-        totalUsersCount={ this.props.totalUsersCount } 
-        pageSize={ this.props.pageSize }
-        currentPage={ this.props.currentPage }
+        { ...this.props }
         redirectToPage={ this.redirectToPage }
         loadFullData={ this.loadFullData }
-        users={ this.props.users }
-        refollow={ this.props.refollow }
-        isFull={ this.props.isFull }
-        isLoading={ this.props.isLoading }
       />
     </React.Fragment>
   }
