@@ -20,9 +20,10 @@ let Users = props => {
     <div>
       <h1 ref={ element }>Find users</h1>
       <div className={styles.users}>
-        { props.users.map((item) => (
-          <User key={item.id} item={item} isProgress={ props.followingAtProgress } toggleFollowing={ props.toggleFollowing } refollow={ props.refollow } />
-        ))}
+      { props.users.map((item) => (
+          <User key={item.id} isAuth={ props.isAuth } item={item} isProgress={ props.followingAtProgress } toggleFollowing={ props.toggleFollowing } refollow={ props.refollow } />
+        ))
+      }
       </div>
       <div className={ styles.users__pages }>
         {
@@ -35,7 +36,6 @@ let Users = props => {
           })
         }
         { view }
-        { showUsers }
       </div>
     </div>
   )

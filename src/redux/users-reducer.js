@@ -17,6 +17,7 @@ let stateDefault = {
   isFull: false,
   currentPage: 1,
   isLoading: false,
+  isAutoLoading: false,
   followingAtProgress: []
 }
 
@@ -25,7 +26,7 @@ function usersReducer(state = stateDefault, action) {
 		case SET_USER:
       return { ...state, users: [  ...action.data] }
     case ADD_USERS:
-      return { ...state, users: [ ...state.users, ...action.data.items], currentPage: state.currentPage + 1 }
+      return { ...state, users: [ ...state.users, ...action.data.items], currentPage: state.currentPage + 1, isAutoLoading: true }
 		case REFOLLOW_USER: 
 			return { ...state, users: state.users.map(item => {
 				if (item.id === action.data) return { ...item, followed: !item.followed }
@@ -34,7 +35,7 @@ function usersReducer(state = stateDefault, action) {
 		case EDIT_PAGE:
 			return { ...state, currentPage: action.data }
 		case EDIT_TOTAL_COUNT:
-			return { ...state, totalUsersCount: action.data / 3, totalFullCount: action.data }
+			return { ...state, totalUsersCount: action.data / 3, totalFullCount: action.data, isAutoLoading: false }
 		case GET_FULL_PAGE:
 			let fullData = state.totalFullCount
 			return { ...state, totalUsersCount: fullData, isFull: true }
@@ -89,10 +90,8 @@ export const toggleFollowing = (item) =>  {
 	}
 }
 
-export const loadUsers = (element, pageSize, currentPage) => dispatch => {
-  window.scrollBy({ top: element.current.getBoundingClientRect().top, behavior: "smooth" })
+export const loadUsers = (pageSize, currentPage) => dispatch => {
   usersAPI.getPageUsers(currentPage + 1, pageSize).then(data => {
-    console.log(data)
     dispatch(addUsers(data))
   })
 }

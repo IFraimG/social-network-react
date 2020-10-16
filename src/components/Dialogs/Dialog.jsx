@@ -5,7 +5,6 @@ import c from "./Dialog.module.css";
 
 function Dialog(props) {
   let messageElement = useRef(null)
-
   let user = props.users.map(item => {
     return <DialogItem key={ item.id } name={ item.name } id={ item.id } />
   })

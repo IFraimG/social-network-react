@@ -2,7 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
 import Loader from "../Loaders/Loader"
+import WithAuthRedirect from "../hoc/WithAuthRedirect"
 import { getFullPages, getUsersThunkCreator, redirectPageThunk, toggleFollowing, loadUsers } from "../../redux/users-reducer"
+import { compose } from "redux";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -13,7 +15,8 @@ class UsersContainer extends React.Component {
   }
 
   loadUsersData = (element, pageSize, currentPage) => {
-    this.props.loadUsers(element, pageSize, currentPage)
+    window.scrollBy({ top: element.current.getBoundingClientRect().top, behavior: "smooth" })
+    this.props.loadUsers(pageSize, currentPage)
   }
 
   loadFullData = () => this.props.getFullPages()
@@ -41,8 +44,13 @@ const mapStateToProps = (state) => {
     currentPage: state.usersPage.currentPage,
     isFull: state.usersPage.isFull,
     isLoading: state.usersPage.isLoading,
-    followingAtProgress: state.usersPage.followingAtProgress
+    isAutoLoading: state.usersPage.isAutoLoading,
+    followingAtProgress: state.usersPage.followingAtProgress,
+    isAuth: state.auth.isAuth
   };
 };
 
-export default connect(mapStateToProps, { getFullPages, getUsersThunkCreator, redirectPageThunk, toggleFollowing, loadUsers })(UsersContainer);
+export default compose(
+  WithAuthRedirect,
+  connect(mapStateToProps, { getFullPages, getUsersThunkCreator, redirectPageThunk, toggleFollowing, loadUsers }),
+)(UsersContainer);

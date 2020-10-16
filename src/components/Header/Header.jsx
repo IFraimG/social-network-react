@@ -8,7 +8,7 @@ function Header(props) {
     <header className={ c.header }>
       <div className={ c.header__logo }>
         <img src={ logo } />
-        <NavLink to="/" className={ c.header__title }>MyOcean V2</NavLink>
+        <NavLink to="/login" className={ c.header__title }>MyOcean V2</NavLink>
       </div>
       <h2>Social network created using React !</h2>
       { !props.isAuth ? <NavLink className={"link " + c.header__link} to="/login">Login</NavLink> : <NavLink className={"link " + c.header__link} to={"/profile/" + props.id }>{ props.login }</NavLink> }

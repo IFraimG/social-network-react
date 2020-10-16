@@ -5,7 +5,7 @@ const configAxios = axios.create({
   headers: {
     "API-KEY": "874a378d-a4dd-474f-a96b-3106d40560af"
   },
-  baseURL: "https://social-network.samuraijs.com/api/1.0"
+  baseURL: "https://social-network.samuraijs.com/api/1.0",
 })
 
 export const usersAPI = {

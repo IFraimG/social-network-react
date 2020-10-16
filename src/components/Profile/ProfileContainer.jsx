@@ -2,8 +2,10 @@ import React from "react";
 import Profile from "./Profile";
 import { profileAPI } from "../../api/api"
 import { connect } from "react-redux"
-import { withRouter, Redirect } from "react-router-dom"
+import { compose } from "redux"
+import { withRouter } from "react-router-dom"
 import { setUser, refollowUser } from "../../redux/profile-reducer"
+import WithAuthRedirect from "../hoc/WithAuthRedirect"
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -14,19 +16,16 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.match.params.id) {
-      return <Redirect to={{ pathname: "/" }} />
-    }
     return <Profile { ...this.props } profile={ this.props.profile } />
   } 
 }
 
 function mapStateToProps(state) {
-  return {
-    profile: state.profilePage.profile
-  }
+  return { profile: state.profilePage.profile }
 }
 
-let urlDataComponent = withRouter(ProfileContainer)
-
-export default connect(mapStateToProps, { setUserData: setUser, refollowUser })(urlDataComponent);
+export default compose(
+  withRouter, 
+  WithAuthRedirect, 
+  connect(mapStateToProps, { setUserData: setUser, refollowUser })
+)(ProfileContainer)

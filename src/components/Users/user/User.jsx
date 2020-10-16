@@ -4,40 +4,43 @@ import styles from "../Users.module.css";
 import img from "../../../img/user.png"
 
 function User(props) {
-  let isFollow = (
-    <button 
+  let isFollow = ""
+
+  if (props.item.followed && props.isAuth) isFollow = (
+    <button
       disabled={props.isProgress.some(id => id === props.item.id)} 
       onClick={() => props.toggleFollowing(props.item)}
     >Unfollow</button>
   )
 
-  let isImage = (
-    <NavLink to={ "/profile/" + props.item.id }>
-      <img src={ img } alt="" />
-    </NavLink>
-  )
-  if (props.item.photos.small !== null) isImage = (
-    <NavLink to={ "/profile/" + props.item.id }>
-      <img src={ props.item.photos.small } alt="" />
-    </NavLink>
-  )
-
-  if (!props.item.followed) isFollow = (
+  if (!props.item.followed && props.isAuth) isFollow = (
     <button 
       disabled={props.isProgress.some(id => id === props.item.id)} 
       onClick={() => props.toggleFollowing(props.item)}
     >Follow</button>
   )
 
+  let isImage = (
+    <NavLink to={"/profile/" + props.item.id}>
+      <img src={ img } alt="" />
+    </NavLink>
+  )
+
+  if (props.item.photos.small !== null) isImage = (
+    <NavLink to={"/profile/" + props.item.id}>
+      <img src={ props.item.photos.small } alt="" />
+    </NavLink>
+  )
+
   return (
     <div className={styles.user}>
       <div className={styles.user__left}>
         { isImage }
-        {isFollow}
+        { isFollow }
       </div>
       <div className={styles.user__right}>
         <div className={styles.user__title}>
-          <NavLink className={ styles.user__link } to={ "/profile/" + props.item.id }>
+          <NavLink className={styles.user__link} to={"/profile/" + props.item.id}>
             <h2>{props.item.name}</h2>
           </NavLink>
           <p>{props.item.description}</p>

@@ -8,6 +8,7 @@ import SuperDialogsContainer from "./components/Dialogs/DialogContainer"
 import UsersContainer from "./components/Users/UsersContainer"
 import ProfileContainer from './components/Profile/ProfileContainer'
 import Settings from "./components/Settings/Settings"
+import LoginPage from "./components/Login/Login"
 import Music from "./components/Music/Music"
 import News from "./components/News/News"
 import './App.css';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/news" render={ () => <News /> } />
         <Route path="/users" render={ () => <UsersContainer /> } />
         <Route path="/music" render={ () => <Music /> } />
+        <Route path="/login" render={ () => <LoginPage /> } />
       </div>  
     </div>
   );
