@@ -2,26 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import Users from "./Users";
 import Loader from "../Loaders/Loader"
-import { refollow, setUsers, editPage, setTotalCount, getFullPages, reloading } from "../../redux/users-reducer"
-import { usersAPI } from "../../api/api"
+import { getFullPages, getUsersThunkCreator, redirectPageThunk, toggleFollowing, loadUsers } from "../../redux/users-reducer"
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.reloading()
-    usersAPI.getPageUsers(this.props.currentPage, this.props.pageSize)
-      .then(data => {
-        this.props.setUsers(data.items)
-        this.props.setTotalCount(data.totalCount)
-        this.props.reloading()
-      });
+    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
   }
   redirectToPage = (numPage, element) => {
-    this.props.editPage(numPage)
-    usersAPI.getPageUsers(numPage, this.props.pageSize)
-      .then(data => {
-        this.props.setUsers(data.items)
-        window.scrollBy({ top: element.current.getBoundingClientRect().top, behavior: "smooth" })
-      });
+    this.props.redirectPageThunk(numPage, element, this.props.pageSize)
+  }
+
+  loadUsersData = (element, pageSize, currentPage) => {
+    this.props.loadUsers(element, pageSize, currentPage)
   }
 
   loadFullData = () => this.props.getFullPages()
@@ -35,6 +27,7 @@ class UsersContainer extends React.Component {
         { ...this.props }
         redirectToPage={ this.redirectToPage }
         loadFullData={ this.loadFullData }
+        loadUsers={ this.loadUsersData }
       />
     </React.Fragment>
   }
@@ -47,8 +40,9 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFull: state.usersPage.isFull,
-    isLoading: state.usersPage.isLoading
+    isLoading: state.usersPage.isLoading,
+    followingAtProgress: state.usersPage.followingAtProgress
   };
 };
 
-export default connect(mapStateToProps, { refollow, setUsers, editPage, setTotalCount, getFullPages, reloading })(UsersContainer);
+export default connect(mapStateToProps, { getFullPages, getUsersThunkCreator, redirectPageThunk, toggleFollowing, loadUsers })(UsersContainer);

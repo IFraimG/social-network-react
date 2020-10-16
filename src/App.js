@@ -5,12 +5,12 @@ import HeaderContainer from "./components/Header/HeaderContainer"
 import NavbarContainer from "./components/Navbar/NavbarContainer"
 import SuperSidebarContainer from "./components/Navbar/Sidebar/SidebarContainer"
 import SuperDialogsContainer from "./components/Dialogs/DialogContainer"
+import UsersContainer from "./components/Users/UsersContainer"
+import ProfileContainer from './components/Profile/ProfileContainer'
 import Settings from "./components/Settings/Settings"
 import Music from "./components/Music/Music"
 import News from "./components/News/News"
-import UsersContainer from "./components/Users/UsersContainer"
 import './App.css';
-import ProfileContainer from './components/Profile/ProfileContainer';
 
 function App() {
   return (

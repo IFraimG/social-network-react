@@ -1,16 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom"
-import { usersAPI } from "../../../api/api"
 import styles from "../Users.module.css";
 import img from "../../../img/user.png"
 
 function User(props) {
-  let isFollow = <button onClick={ () => {
-    usersAPI.unFollow(props.item.id)
-      .then(res => {
-        if (res.data.resultCode === 0) props.refollow(props.item.id)
-      })
-  }}>Unfollow</button>
+  let isFollow = (
+    <button 
+      disabled={props.isProgress.some(id => id === props.item.id)} 
+      onClick={() => props.toggleFollowing(props.item)}
+    >Unfollow</button>
+  )
 
   let isImage = (
     <NavLink to={ "/profile/" + props.item.id }>
@@ -23,12 +22,13 @@ function User(props) {
     </NavLink>
   )
 
-  if (!props.item.followed) isFollow = <button onClick={() => {
-    usersAPI.follow(props.item.id)
-      .then(res => {
-        if (res.data.resultCode === 0)  props.refollow(props.item.id)
-      })
-  }}>Follow</button>
+  if (!props.item.followed) isFollow = (
+    <button 
+      disabled={props.isProgress.some(id => id === props.item.id)} 
+      onClick={() => props.toggleFollowing(props.item)}
+    >Follow</button>
+  )
+
   return (
     <div className={styles.user}>
       <div className={styles.user__left}>
