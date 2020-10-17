@@ -27,6 +27,14 @@ export const profileAPI = {
   getProfile: async (id) => {
     let res = await configAxios.get("/profile/" + id)
     return res.data;
+  },
+  getStatus: async (id) => {
+    let res = await configAxios.get("/profile/status/" + id)
+    return res
+  },
+  updateStatus: async (status) => {
+    let res = await configAxios.put("/profile/status", { status: status })
+    return res
   }
 }
 

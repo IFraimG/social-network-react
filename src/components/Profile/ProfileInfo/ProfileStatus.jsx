@@ -3,16 +3,31 @@ import styles from "./ProfileInfo.module.css";
 
 class ProfileStatus extends React.Component {
   state = {
-    editMode: false
+    editMode: false,
+    status: this.props.status
   }
 
-  toggleModeActivate = event => {
-    this.setState((state, props) => ({editMode: !state.editMode}))
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.status.length && prevProps.length > 0) this.state.status = prevProps.status
+  }
+
+  toggleModeActivate = () => {
+    this.setState((state) => ({editMode: !state.editMode}))
+    if (this.setState.status) this.props.updateStatus(this.state.status)
+  }
+
+  sendStatus = (event) => {
+    this.props.updateStatus(this.state.status)
+    this.setState({editMode: false})
+  }
+
+  inputStatus = (event) => {
+    this.setState({status: event.target.value})
   }
 
   render() {
-    let description = <p onClick={ this.toggleModeActivate }>The user doesn't complete a status</p>
-    if (this.props.profile && this.props.profile.aboutMe !== null) description = <p>{ this.props.profile.aboutMe }</p>
+    let description = <p onDoubleClick={ this.toggleModeActivate }>The user doesn't complete a status</p>
+    if (this.props.status) description = <p onDoubleClick={ this.toggleModeActivate }>{ this.props.status }</p>
 
     return (
       <>
@@ -26,14 +41,21 @@ class ProfileStatus extends React.Component {
             <input 
               autoFocus={true} 
               type="text" 
-              onBlur={this.toggleModeActivate} 
+              className={ this.props.classes.inputColor }
+              onChange={this.inputStatus}
+              value={this.state.status}
               placeholder="Complete your status..." 
-              value={this.props.profile.aboutMe} 
             />
+            <img 
+              onClick={ this.sendStatus } 
+              className={styles.info__save} 
+              src="https://www.flaticon.com/svg/static/icons/svg/25/25398.svg" 
+              alt=""/
+            >
             <img 
               onClick={ this.toggleModeActivate } 
               className={styles.info__save} 
-              src="https://www.flaticon.com/svg/static/icons/svg/25/25398.svg" 
+              src="https://www.flaticon.com/svg/static/icons/svg/126/126497.svg" 
               alt=""/
             >
           </div>

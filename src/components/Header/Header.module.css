@@ -37,7 +37,7 @@
   align-items: center;
 }
 
-@media (max-width: 801px) {
+@media (max-width: 901px) {
   .header h2  {
     display: none;
   }

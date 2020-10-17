@@ -1,7 +1,7 @@
 .poster img {
   width: 100%;
   height: 200px;
-  margin-bottom: 30px;
+  padding: 20px;
   object-fit: cover;
 }
 
@@ -12,7 +12,7 @@
     "left follow"
     "left follow";
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  /* border: 1px solid rgba(0, 0, 0, 0.3); */
   padding: 20px;
 }
 
@@ -28,6 +28,14 @@
   margin-left: 30px;
 }
 
+.info__status {
+  display: flex;
+}
+
+.info__status p {
+  padding: 0 10px;
+}
+
 .info__title h2 {
   font-size: 32px;
 }
@@ -41,6 +49,8 @@
   max-width: 128px;
   max-height: 128px;
   object-fit: cover;
+  background-color: #fff;
+  border: 5px solid #fff;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -64,11 +74,14 @@
 }
 
 .info__save {
-  width: 24px;
-  height: 24px;
-  margin-left: 10px;
+  width: 32px;
+  height: 32px;
+  margin-left: 20px;
+  margin-right: 20px;
   cursor: pointer;
   transition: 0.2s;
+  object-fit: cover;
+  background-color: #fff;
 }
 
 .info__save:hover {

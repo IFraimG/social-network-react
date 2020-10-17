@@ -2,7 +2,9 @@
   display: grid;
   grid-template-rows: 70px 1fr;
   grid-template-columns: 2fr 10fr;
-  grid-gap: 10px;
+  grid-gap: 30px;
+  font-family: "Verdana";
+  background: #fff;
   /* align-items: center; */
   grid-template-areas:
     "header header"
