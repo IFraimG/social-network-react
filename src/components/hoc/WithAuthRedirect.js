@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 function WithAuthRedirect(Component) {
   class RedirectComponent extends React.Component {
     render() {
-      if (!this.props.auth) return <Redirect to="/login" />
+      // if (!this.props.auth) return <Redirect to="/login" />
       return <Component {...this.props} />
     }
   }

@@ -1,5 +1,6 @@
 import React from "react";
 import Loader from "../../Loaders/Loader"
+import ProfileStatus from "./ProfileStatus"
 import c from "./ProfileInfo.module.css";
 import logo from "../../../img/user.png"
 
@@ -14,9 +15,6 @@ function ProfileInfo(props) {
       <img className={c.info__image} src={ props.profile.photos.small } alt="img" />
     </div>
   )
-
-  let description = <p>Пользователь не указал описание</p>
-  if (props.profile && props.profile.aboutMe !== null) description = <p>{ props.profile.aboutMe }</p>
   
   if (!Object.keys(props.profile).length) return <Loader />
   else return (
@@ -29,7 +27,7 @@ function ProfileInfo(props) {
           { image }
           <div className={c.info__title}>
             <h2>{ props.profile.fullName }</h2>
-            { description }
+            <ProfileStatus profile={ props.profile } />
           </div>
         </div>
       </div>

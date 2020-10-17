@@ -5,7 +5,6 @@ import img from "../../../img/user.png"
 
 function User(props) {
   let isFollow = ""
-
   if (props.item.followed && props.isAuth) isFollow = (
     <button
       disabled={props.isProgress.some(id => id === props.item.id)} 

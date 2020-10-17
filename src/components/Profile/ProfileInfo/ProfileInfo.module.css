@@ -48,3 +48,29 @@
 .info__follow {
   grid-area: follow;
 }
+
+.info__input {
+  display: flex;
+  align-items: center;
+}
+
+.info__input input {
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.info__input input:active, .info__input input:focus {
+  outline: none;
+}
+
+.info__save {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.info__save:hover {
+  opacity: 0.6;
+}
