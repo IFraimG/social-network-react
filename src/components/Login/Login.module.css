@@ -1,0 +1,95 @@
+.form {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 9px;
+  min-height: 300px;
+}
+
+.form__wrapper {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.form__wrapper h2 {
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.form__input {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.form__left {
+  text-align: center;
+}
+
+.form__right {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+label {
+  cursor: pointer;
+  margin-right: 10px;
+  user-select: none;
+}
+
+input {
+  width: 400px;
+  height: 30px;
+  padding-left: 5px;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 22px;
+  background-color: rgb(45, 180, 63);
+  color: #fff;
+  border: 2px solid rgb(45, 180, 63);
+  width: 180px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.1s ease-in-out;
+}
+
+button:active {
+  background-color: rgb(40, 155, 55);
+  border-color: rgb(29, 114, 40);
+}
+
+.error {
+  color: rgb(168, 47, 47);
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.checkbox {
+  margin-bottom: 30px;
+}
+
+.errorsList {
+  margin-top: 20px;
+}
+
+.errorsList span {
+  font-weight: bold;
+  text-decoration: underline;
+}

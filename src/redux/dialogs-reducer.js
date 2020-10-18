@@ -20,19 +20,14 @@ let stateInit = {
 function dialogsReducer(state = stateInit, action) {
   switch (action.type) {
     case ADD_MESSAGE:
-      let newMessage = { id: 6, message: state.msgValue }
+      let newMessage = { id: 6, message: action.data }
       return { ...state, messages: [...state.messages, newMessage], msgValue: "" }
-    case CHANGE_MESSAGE: return { ...state, msgValue: action.data }
     default: return { ...state };
   }
 }
 
-export function sendMessage() {
-  return { type: ADD_MESSAGE }
-}
-
-export function editMessage(data) {
-  return { type: CHANGE_MESSAGE, data: data }
+export function sendMessage(msg) {
+  return { type: ADD_MESSAGE, data: msg }
 }
 
 export default dialogsReducer;

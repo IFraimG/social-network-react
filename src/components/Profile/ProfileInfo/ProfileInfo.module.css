@@ -1,7 +1,7 @@
 .poster img {
   width: 100%;
   height: 200px;
-  padding: 20px;
+  margin-bottom: 20px;
   object-fit: cover;
 }
 
@@ -12,7 +12,7 @@
     "left follow"
     "left follow";
   align-items: center;
-  /* border: 1px solid rgba(0, 0, 0, 0.3); */
+  border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 20px;
 }
 

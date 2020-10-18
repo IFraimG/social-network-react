@@ -1,5 +1,5 @@
 import MyPosts from "./MyPosts";
-import { createPost, updateNewPost } from "../../../redux/profile-reducer";
+import { createPost } from "../../../redux/profile-reducer";
 import { connect } from "react-redux";
 
 function mapStateToProps(state) {
@@ -9,4 +9,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { createPost: createPost, updateNewPost: updateNewPost })(MyPosts);
+export default connect(mapStateToProps, { createPost })(MyPosts);

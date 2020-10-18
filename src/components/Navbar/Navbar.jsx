@@ -4,11 +4,20 @@ import c from "./Navbar.module.css";
 
 function Navbar(props) {
   let isProfile = ""
-  if (props.isAuth) isProfile = (
-    <NavLink to={"/profile/" + props.id} className={`${c.nav__item} ${c.nav__nolast}`}>
-      <div>Profile</div>
-    </NavLink>
-  )
+  let logout = ""
+
+  if (props.isAuth) {
+    isProfile = (
+      <NavLink to={"/profile/" + props.id} className={`${c.nav__item} ${c.nav__nolast}`}>
+        <div>Profile</div>
+      </NavLink>
+    )
+    logout = (
+      <div onClick={ props.logout } className={ c.nav__item }>
+        <div>Log out</div>
+      </div>
+    )
+  }
   return (
     <nav className={ c.nav }>
       <div className={ c.nav__content }>
@@ -25,9 +34,10 @@ function Navbar(props) {
         <NavLink to="/users" className={`${c.nav__item} ${c.nav__nolast}`}>
           <div>Find users</div>
         </NavLink>
-        <NavLink to="/settings" className={ c.nav__item }>
+        <NavLink to="/settings" className={`${c.nav__item} ${c.nav__nolast}`}>
           <div>Settings</div>
         </NavLink>
+        { logout }
       </div>
     </nav>
   );

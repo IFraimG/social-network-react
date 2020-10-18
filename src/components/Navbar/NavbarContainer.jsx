@@ -1,6 +1,6 @@
-import React from "react";
 import { connect } from "react-redux"
 import Navbar from "./Navbar"
+import { logoutThunk } from "../../redux/auth-reducer"
 
 const mapStateToProps = state => {
   return {
@@ -9,4 +9,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logout: logoutThunk })(Navbar);

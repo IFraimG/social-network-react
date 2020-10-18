@@ -2,7 +2,6 @@ import { profileAPI } from "../api/api"
 
 const ADD_POST = "ADD-POST"
 const GET_USER = "GET_USER"
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
 const REFOLLOW_USER = "REFOLLOW_USER"
 const SET_STATUS = "SET_STATUS"
 
@@ -22,10 +21,8 @@ let stateInit = {
 function profileReducer(state = stateInit, action) {
   switch (action.type) {
     case ADD_POST:
-      let newPost = { id: 6, text: state.textValue, likesCount: 0 };
+      let newPost = { id: 6, text: action.data, likesCount: 0 };
       return { ...state, posts: [...state.posts, newPost], textValue: "" };
-    case UPDATE_POST_TEXT: 
-      return { ...state, textValue: action.data };
     case GET_USER:
       return { ...state, profile: action.data }
     case REFOLLOW_USER:
@@ -36,8 +33,7 @@ function profileReducer(state = stateInit, action) {
   }
 }
 
-export const createPost = () => ({ type: ADD_POST })
-export const updateNewPost = data => ({ type: UPDATE_POST_TEXT, data: data})
+export const createPost = postText => ({ type: ADD_POST, data: postText })
 export const setUser = profile => ({ type: GET_USER, data: profile })
 export const refollowUser = () => ({ type: REFOLLOW_USER  })
 export const getStatus = status => ({ type: SET_STATUS, data: status })
@@ -56,7 +52,7 @@ export const getUserStatus = (id) => dispatch => {
 
 export const updateUserStatus = (status) => dispatch => {
   profileAPI.updateStatus(status)
-    .then(res => dispatch(getStatus(status)))
+    .then(() => dispatch(getStatus(status)))
     .catch(err => console.log(err))
 }
 

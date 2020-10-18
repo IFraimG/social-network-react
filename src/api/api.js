@@ -42,5 +42,12 @@ export const authAPI = {
   authUser: async () => {
     let res = await configAxios.get("/auth/me")
     return res.data;
+  },
+  loginUser: async (email, password, rememberMe = false) => {
+    let res = await configAxios.post("/auth/login", {email, password, rememberMe})
+    return res.data
+  },
+  logout: () => {
+    return configAxios.delete("/auth/login")
   }
 }

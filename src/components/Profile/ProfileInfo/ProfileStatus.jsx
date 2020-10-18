@@ -8,7 +8,7 @@ class ProfileStatus extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.status.length && prevProps.length > 0) this.state.status = prevProps.status
+    if (!this.state.status.length && this.props.status.length > 0) this.state.status = this.props.status
   }
 
   toggleModeActivate = () => {
@@ -41,7 +41,6 @@ class ProfileStatus extends React.Component {
             <input 
               autoFocus={true} 
               type="text" 
-              className={ this.props.classes.inputColor }
               onChange={this.inputStatus}
               value={this.state.status}
               placeholder="Complete your status..." 

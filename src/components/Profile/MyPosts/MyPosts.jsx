@@ -7,7 +7,7 @@ function MyPosts(props) {
   let post = props.posts.map(item => <Post key={ item.id } text={ item.text } likes={ item.likesCount } />)
   return (
     <div>
-      <CreatePost updateNewPost={ props.updateNewPost } addPost={ props.createPost } textValue={ props.textValue } />
+      <CreatePost addPost={ props.createPost } textValue={ props.textValue } />
       <div className={c.posts}>
         <h1>My posts</h1>
         { post }

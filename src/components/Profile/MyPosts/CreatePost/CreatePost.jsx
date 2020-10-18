@@ -1,30 +1,32 @@
-import React, { useRef } from "react";
+import React from "react";
+import { Form, Field } from "react-final-form"
 import c from "./CreatePost.module.css";
-// import { addPostActionCreator, updateNewPostActionCreator } from "../../../../redux/profile-reducer"
 
 function CreatePost(props) {
-  let postElement = useRef(null)
 
-  let createPost = () => {
-    props.addPost(postElement.current.value)
-  }
-
-  let changePost = () => {
-    props.updateNewPost(postElement.current.value)
+  let createPost = (text) => {
+    props.addPost(text.textField)
+    text.textField = ""
   }
 
   return (
-    <div className={ c.createpost }>
-      <h1>New post</h1>
-      <div className={ c.createpost__content }>
-        <div className={ c.createpost__field }>
-            <textarea ref={ postElement } onChange={ changePost } value={ props.textValue } placeholder="Tell about us yourself..." />
-        </div>
-        <div className={ c.createpost__rules }>
-          <button onClick={ createPost }>Publish a post</button>
-        </div>
-      </div>
-    </div>
+    <Form initialValues={props.textValue} onSubmit={createPost}>
+      { formProps => (
+        <form onSubmit={formProps.handleSubmit}>
+          <div className={ c.createpost }>
+            <h1>New post</h1>
+            <div className={ c.createpost__content }>
+              <div className={ c.createpost__field }>
+                <Field name="textField" component="textarea" placeholder="Tell about us yourself..."  />
+              </div>
+              <div className={ c.createpost__rules }>
+                <button type="submit">Publish a post</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      )}
+    </Form>
   );
 }
 
