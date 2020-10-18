@@ -10,6 +10,7 @@ import WithAuthRedirect from "../hoc/WithAuthRedirect"
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let id = this.props.match.params.id
+    if (!id) id = this.props.history.push("/login")
     this.props.getUserThunk(id)
     this.props.getUserStatus(id)
   }

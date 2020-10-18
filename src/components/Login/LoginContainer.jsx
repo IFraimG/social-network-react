@@ -7,6 +7,6 @@ function LoginContainer(props) {
   return <Login { ...props } loginUserThunk={props.loginUserThunk} />;
 }
 
-const mapStateToProps = state => ({ errorsList: state.auth.errorsList })
+const mapStateToProps = state => ({ errorsList: state.auth.errorsList, id: state.auth.userID })
 
 export default connect(mapStateToProps, {loginUserThunk})(LoginContainer);

@@ -8,7 +8,7 @@ class ProfileStatus extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (!this.state.status.length && this.props.status.length > 0) this.state.status = this.props.status
+    if (!this.state.status && this.props.status) this.state.status = this.props.status
   }
 
   toggleModeActivate = () => {

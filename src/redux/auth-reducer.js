@@ -38,7 +38,7 @@ export const setError = err => ({ type: SET_ERR, data: err })
 export const clearError = () => ({ type: CLEAR_ERROR })
 
 export const authUserThunk = () => dispatch => {
-  authAPI.authUser()
+  return authAPI.authUser()
     .then(data => {
       if (data.resultCode === 0) {
         let { id, login, email } = data.data

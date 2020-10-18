@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom"
 import { Form, Field } from "react-final-form";
 import styles from "./Login.module.css"
 
@@ -17,6 +18,7 @@ function LoginPage(props) {
   let isError = false
   if (props.errorsList.length > 0) isError = true
 
+  if (props.id) return <Redirect to={"/profile/" + props.id} />
   return (
     <div className={styles.form__wrapper}>
       <h2>Log in to your account</h2>
