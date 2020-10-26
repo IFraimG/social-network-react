@@ -1,6 +1,6 @@
 import React from "react";
 import Loader from "../../Loaders/Loader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHook from "./ProfileStatus";
 import { Project, Words } from "arwes";
 import c from "./ProfileInfo.module.css";
 import logo from "../../../img/user.png";
@@ -35,7 +35,7 @@ function ProfileInfo(props) {
             {image}
             <div className={c.info__title}>
               <h2>{props.profile.fullName}</h2>
-              <ProfileStatus
+              <ProfileStatusWithHook
                 updateStatus={props.updateStatus}
                 status={props.status}
               />

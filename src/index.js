@@ -18,18 +18,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-
-// ReactDOM.render(
-//   <BrowserRouter>
-//     <ThemeProvider theme={ createTheme() }>
-//       <Arwes animate show>
-//         <Provider store={ store }>
-//             <App />
-//         </Provider>
-//       </Arwes>
-//     </ThemeProvider>
-//   </BrowserRouter>,
-//   document.getElementById('root')
-// );
-
 serviceWorker.unregister();

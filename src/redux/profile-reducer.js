@@ -1,9 +1,12 @@
+import { createDuck } from "redux-duck"
 import { profileAPI } from "../api/api"
 
-const ADD_POST = "ADD-POST"
-const GET_USER = "GET_USER"
-const REFOLLOW_USER = "REFOLLOW_USER"
-const SET_STATUS = "SET_STATUS"
+const myDuck = createDuck("profile", "myocean")
+
+const ADD_POST = myDuck.defineType('ADD-POST')
+const GET_USER = myDuck.defineType('GET_USER')
+const REFOLLOW_USER = myDuck.defineType('REFOLLOW_USER')
+const SET_STATUS = myDuck.defineType('SET_STATUS')
 
 let stateInit = {
   posts: [
@@ -18,42 +21,52 @@ let stateInit = {
   status: ""
 }
 
-function profileReducer(state = stateInit, action) {
-  switch (action.type) {
-    case ADD_POST:
-      let newPost = { id: 6, text: action.data, likesCount: 0 };
-      return { ...state, posts: [...state.posts, newPost], textValue: "" };
-    case GET_USER:
-      return { ...state, profile: action.data }
-    case REFOLLOW_USER:
-      return { ...state, profile: { ...state.profile, isFollowed: !state.profile.isFollowed } }
-    case SET_STATUS:
-      return { ...state, status: action.data }
-    default: return { ...state };
+const profileReducer = myDuck.createReducer({
+  [ADD_POST]: (state, action) => {
+    let newPost = { id: 6, text: action.payload, likesCount: 0 };
+    return { ...state, posts: [...state.posts, newPost], textValue: "" };
+  },
+  [GET_USER]: (state, action) => {
+    return { ...state, profile: action.payload }
+  },
+  [REFOLLOW_USER]: (state, action) => {
+    return { ...state, profile: { ...state.profile, isFollowed: !state.profile.isFollowed } }
+  },
+  [SET_STATUS]: (state, action) => {
+    return { ...state, status: action.payload }
+  }
+}, stateInit) 
+
+export const createPost = myDuck.createAction(ADD_POST)
+export const setUser = myDuck.createAction(GET_USER)
+export const refollowUser = myDuck.createAction(REFOLLOW_USER)
+export const getStatus = myDuck.createAction(SET_STATUS)
+
+export const getUserThunk = (id) => async dispatch => {
+  try {
+    let data = await profileAPI.getProfile(id)
+    dispatch(setUser(data))
+  } catch (error) {
+    console.log(error)
   }
 }
 
-export const createPost = postText => ({ type: ADD_POST, data: postText })
-export const setUser = profile => ({ type: GET_USER, data: profile })
-export const refollowUser = () => ({ type: REFOLLOW_USER  })
-export const getStatus = status => ({ type: SET_STATUS, data: status })
-
-export const getUserThunk = (id) => dispatch => {
-  profileAPI.getProfile(id)
-    .then(data => dispatch(setUser(data)))
-    .catch(err => console.log(err))
+export const getUserStatus = (id) => async dispatch => {
+  try {
+    let res = await profileAPI.getStatus(id)
+    dispatch(getStatus(res.data))
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-export const getUserStatus = (id) => dispatch => {
-  profileAPI.getStatus(id)
-    .then(res => dispatch(getStatus(res.data)))
-    .catch(err => console.log(err))
-}
-
-export const updateUserStatus = (status) => dispatch => {
-  profileAPI.updateStatus(status)
-    .then(() => dispatch(getStatus(status)))
-    .catch(err => console.log(err))
+export const updateUserStatus = (status) => async dispatch => {
+  try {
+    await profileAPI.updateStatus(status)
+    dispatch(getStatus(status))
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export default profileReducer;

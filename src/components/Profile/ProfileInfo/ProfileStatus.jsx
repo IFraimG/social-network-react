@@ -1,67 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ProfileInfo.module.css";
 
-class ProfileStatus extends React.Component {
-  state = {
-    editMode: false,
-    status: this.props.status
+function ProfileStatusWithHook(props) {
+  const [editMode, setEditMode] = useState(false)
+  const [status, setStatus] = useState(props.status)
+
+  useEffect(() => {
+    setStatus(props.status)
+  }, [props.status])
+
+  const toggleModeActivate = () => {
+    setEditMode(!editMode)
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!this.state.status && this.props.status) this.state.status = this.props.status
+  const sendStatus = () => {
+    setEditMode(false)
+    props.updateStatus(status)
   }
 
-  toggleModeActivate = () => {
-    this.setState((state) => ({editMode: !state.editMode}))
-    if (this.setState.status) this.props.updateStatus(this.state.status)
+  const inputStatus = (event) => {
+    setStatus(event.target.value)
   }
 
-  sendStatus = (event) => {
-    this.props.updateStatus(this.state.status)
-    this.setState({editMode: false})
-  }
+  let description = (
+    <p onDoubleClick={ toggleModeActivate }>The user doesn't complete a status</p>
+  );
+  if (props.status) description = <p onDoubleClick={ toggleModeActivate }>{props.status}</p>;
 
-  inputStatus = (event) => {
-    this.setState({status: event.target.value})
-  }
-
-  render() {
-    let description = <p onDoubleClick={ this.toggleModeActivate }>The user doesn't complete a status</p>
-    if (this.props.status) description = <p onDoubleClick={ this.toggleModeActivate }>{ this.props.status }</p>
-
-    return (
-      <>
-        {!this.state.editMode &&
-          <div>
-            { description }
-          </div>
-        }
-        {this.state.editMode &&
-          <div className={styles.info__input}>
-            <input 
-              autoFocus={true} 
-              type="text" 
-              onChange={this.inputStatus}
-              value={this.state.status}
-              placeholder="Complete your status..." 
-            />
-            <img 
-              onClick={ this.sendStatus } 
-              className={styles.info__save} 
-              src="https://www.flaticon.com/svg/static/icons/svg/25/25398.svg" 
-              alt=""/
-            >
-            <img 
-              onClick={ this.toggleModeActivate } 
-              className={styles.info__save} 
-              src="https://www.flaticon.com/svg/static/icons/svg/126/126497.svg" 
-              alt=""/
-            >
-          </div>
-        }
-      </>
-    ) 
-  }
+  return (
+    <>
+      {!editMode && <div>{description}</div>}
+      {editMode && (
+        <div className={styles.info__input}>
+          <input
+            autoFocus={true}
+            type="text"
+            onChange={inputStatus}
+            value={status}
+            placeholder="Complete your status..."
+          />
+          <img
+            onClick={sendStatus}
+            className={styles.info__save}
+            src="https://www.flaticon.com/svg/static/icons/svg/25/25398.svg"
+            alt=""
+          />
+          <img
+            onClick={toggleModeActivate}
+            className={styles.info__save}
+            src="https://www.flaticon.com/svg/static/icons/svg/126/126497.svg"
+            alt=""
+          />
+        </div>
+      )}
+    </>
+  );
 }
 
-export default ProfileStatus;
+export default React.memo(ProfileStatusWithHook);

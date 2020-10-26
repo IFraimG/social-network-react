@@ -1,5 +1,9 @@
-const ADD_MESSAGE = "ADD-MESSAGE"
-const CHANGE_MESSAGE = "CHANGE-MESSAGE"
+import { createDuck } from "redux-duck"
+
+const myDuck = createDuck("dialogs", "myocean")
+
+const ADD_MESSAGE = myDuck.defineType("ADD-MESSAGE")
+const CHANGE_MESSAGE = myDuck.defineType("CHANGE-MESSAGE")
 
 let stateInit = {
   messages: [
@@ -17,17 +21,13 @@ let stateInit = {
   ],
 }
 
-function dialogsReducer(state = stateInit, action) {
-  switch (action.type) {
-    case ADD_MESSAGE:
-      let newMessage = { id: 6, message: action.data }
-      return { ...state, messages: [...state.messages, newMessage], msgValue: "" }
-    default: return { ...state };
+const dialogsReducer = myDuck.createReducer({
+  [ADD_MESSAGE]: (state, action) => {
+    let newMessage = { id: 6, message: action.payload }
+    return { ...state, messages: [...state.messages, newMessage], msgValue: "" }
   }
-}
+}, stateInit)
 
-export function sendMessage(msg) {
-  return { type: ADD_MESSAGE, data: msg }
-}
+export const sendMessage = myDuck.createAction(ADD_MESSAGE)
 
 export default dialogsReducer;

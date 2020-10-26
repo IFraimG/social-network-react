@@ -81,6 +81,21 @@ h1 {
   color: #000;
 }
 
+.users__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.users__title label {
+  font-size: 18px;
+}
+
+.users__title input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
 .users__pages {
   display: flex;
   flex-wrap: wrap;

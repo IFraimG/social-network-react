@@ -20,6 +20,10 @@ export const usersAPI = {
   },
   follow: (id) => {
     return configAxios.post(`/follow/${id}`, {})
+  },
+  getFollowedUsers: async (pageSize) => {
+    let res = await configAxios.get(`/users?count=${100}&friend=${true}`)
+    return res.data
   }
 }
 
