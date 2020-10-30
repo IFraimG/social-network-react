@@ -3,11 +3,7 @@ import Profile from "./Profile";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withRouter } from "react-router-dom";
-import {
-  getUserThunk,
-  getUserStatus,
-  updateUserStatus,
-} from "../../redux/profile-reducer";
+import { getUserThunk, getUserStatus, updateUserStatus } from "../../redux/profile-reducer";
 import WithAuthRedirect from "../hoc/WithAuthRedirect";
 // import WithStyleHOC from "../hoc/WithStylesHOC"
 
@@ -37,7 +33,6 @@ function mapStateToProps(state) {
 }
 
 export default compose(
-  // WithStyleHOC,
   withRouter,
   WithAuthRedirect,
   connect(mapStateToProps, { getUserThunk, getUserStatus, updateUserStatus })

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./ProfileInfo.module.css";
 
 function ProfileStatusWithHook(props) {
   const [editMode, setEditMode] = useState(false)
   const [status, setStatus] = useState(props.status)
+  const statusREF = useRef(null)
 
   useEffect(() => {
     setStatus(props.status)
@@ -14,8 +15,8 @@ function ProfileStatusWithHook(props) {
   }
 
   const sendStatus = () => {
-    setEditMode(false)
     props.updateStatus(status)
+    setEditMode(false)
   }
 
   const inputStatus = (event) => {
@@ -25,12 +26,11 @@ function ProfileStatusWithHook(props) {
   let description = (
     <p onDoubleClick={ toggleModeActivate }>The user doesn't complete a status</p>
   );
-  if (props.status) description = <p onDoubleClick={ toggleModeActivate }>{props.status}</p>;
+  if (props.status) description = <span ref={statusREF} onDoubleClick={ toggleModeActivate }>{props.status}</span>;
 
   return (
     <>
-      {!editMode && <div>{description}</div>}
-      {editMode && (
+      {!editMode ? description : (
         <div className={styles.info__input}>
           <input
             autoFocus={true}

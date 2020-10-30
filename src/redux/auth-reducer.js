@@ -3,11 +3,15 @@ import { authAPI } from "../api/api"
 
 const myDuck = createDuck("auth", "myocean")
 
+// КЛЮЧ К ЭКШОНАМ
+
 const SET_USER_DATA = myDuck.defineType("SET_USER_DATA")
 const DELETE_USER_DATA = myDuck.defineType("DELETE_USER_DATA")
 const SET_USER_ID = myDuck.defineType("SET_USER_ID")
 const SET_ERR = myDuck.defineType("SET_ERR")
 const CLEAR_ERROR = myDuck.defineType("CLEAR_ERROR")
+
+// СТЭЙТ
 
 let stateDefault = {
   userID: null,
@@ -17,9 +21,11 @@ let stateDefault = {
   errorsList: []
 };
 
+// РЕДЮСЕРЫ
+
 const authReducer = myDuck.createReducer({
   [SET_USER_DATA]: (state, action) => {
-    return { ...state, userID: action.payload, isAuth: true }
+    return { ...state, userID: action.payload.id, login: action.payload.login, isAuth: true }
   },
   [DELETE_USER_DATA]: (state, action) => {
     return { ...state, isAuth: false, userID: null, email: null, login: null }
@@ -35,17 +41,20 @@ const authReducer = myDuck.createReducer({
   }
 }, stateDefault)
 
+// ЭКШОНЫ 
+
 export const setUser = myDuck.createAction(SET_USER_DATA)
 export const deleteUser = myDuck.createAction(SET_USER_DATA)
 export const setUserID = myDuck.createAction(SET_USER_ID)
 export const setError = myDuck.createAction(SET_ERR)
 export const clearError = myDuck.createAction(CLEAR_ERROR)
 
+// САНКИ
+
 export const authUserThunk = () => async dispatch => {
   let data = await authAPI.authUser()
   if (data.resultCode === 0) {
-    let { id, login, email } = data.data
-    dispatch(setUser(id, email, login))
+    dispatch(setUser({id: data.data.id, email: data.data.email, login: data.data.login}))
   }
   return data
 }
@@ -53,7 +62,6 @@ export const authUserThunk = () => async dispatch => {
 export const logoutThunk = () => dispatch => {
   authAPI.logout()
     .then(data => {
-      console.log(data)
       dispatch(deleteUser())
     })
     .catch(err => console.log(err))
