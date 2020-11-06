@@ -10,6 +10,7 @@ const DELETE_USER_DATA = myDuck.defineType("DELETE_USER_DATA")
 const SET_USER_ID = myDuck.defineType("SET_USER_ID")
 const SET_ERR = myDuck.defineType("SET_ERR")
 const CLEAR_ERROR = myDuck.defineType("CLEAR_ERROR")
+const GET_CAPTCHA_URL = myDuck.defineType('GET_CAPTCHA')
 
 // СТЭЙТ
 
@@ -18,7 +19,8 @@ let stateDefault = {
   email: null,
   login: null,
   isAuth: false,
-  errorsList: []
+  errorsList: [],
+  captchaURL: null
 };
 
 // РЕДЮСЕРЫ
@@ -38,6 +40,9 @@ const authReducer = myDuck.createReducer({
   },
   [CLEAR_ERROR]: (state, action) => {
     return {...state, errorsList: []}
+  },
+  [GET_CAPTCHA_URL]: (state, action) => {
+    return { ...state, captchaURL: action.payload }
   }
 }, stateDefault)
 
@@ -48,8 +53,15 @@ export const deleteUser = myDuck.createAction(SET_USER_DATA)
 export const setUserID = myDuck.createAction(SET_USER_ID)
 export const setError = myDuck.createAction(SET_ERR)
 export const clearError = myDuck.createAction(CLEAR_ERROR)
+export const getCaptcha = myDuck.createAction(GET_CAPTCHA_URL)
 
 // САНКИ
+
+export const getCaptchaURL = () => async dispatch => {
+  let res = await authAPI.getCaptchaURL()
+  let captchURL = res.data.url
+  dispatch(getCaptcha(captchURL))
+}
 
 export const authUserThunk = () => async dispatch => {
   let data = await authAPI.authUser()
@@ -69,12 +81,15 @@ export const logoutThunk = () => dispatch => {
 
 export const loginUserThunk = data => async dispatch => {
   try {
-    let res = await authAPI.loginUser(data.emailField, data.passwordField, data.rememberMeField)
+    let res = await authAPI.loginUser(data.emailField, data.passwordField, data.rememberMeField, data.captchaField)
     if (!res.resultCode) {
       dispatch(setUserID(res.data.userId))
       dispatch(clearError())
     }
-    else dispatch(setError(res.messages))
+    else {
+      dispatch(getCaptchaURL())
+      dispatch(setError(res.messages))
+    }
   } catch (error) {
     console.log("Err", error)
   }

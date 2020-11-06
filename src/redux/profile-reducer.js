@@ -7,6 +7,9 @@ const ADD_POST = myDuck.defineType('ADD-POST')
 const GET_USER = myDuck.defineType('GET_USER')
 const REFOLLOW_USER = myDuck.defineType('REFOLLOW_USER')
 const SET_STATUS = myDuck.defineType('SET_STATUS')
+const SAVE_PHOTO = myDuck.defineType("SET_PHOTO")
+const EDIT_MODAL = myDuck.defineType("EDIT_MODAL")
+const EDIT_CONTACTS = myDuck.defineType("EDIT_CONTACTS")
 
 let stateInit = {
   posts: [
@@ -18,7 +21,8 @@ let stateInit = {
   ],
   textValue: "",
   profile: {},
-  status: ""
+  status: "",
+  isModal: false
 }
 
 const profileReducer = myDuck.createReducer({
@@ -34,6 +38,15 @@ const profileReducer = myDuck.createReducer({
   },
   [SET_STATUS]: (state, action) => {
     return { ...state, status: action.payload }
+  },
+  [SAVE_PHOTO]: (state, action) => {
+    return { ...state, profile: { images: action.photos }}
+  },
+  [EDIT_MODAL]: (state, action) => {
+    return { ...state, isModal: action.payload }
+  },
+  [EDIT_CONTACTS]: (state, action) => {
+
   }
 }, stateInit) 
 
@@ -41,6 +54,9 @@ export const createPost = myDuck.createAction(ADD_POST)
 export const setUser = myDuck.createAction(GET_USER)
 export const refollowUser = myDuck.createAction(REFOLLOW_USER)
 export const getStatus = myDuck.createAction(SET_STATUS)
+export const setPhoto = myDuck.createAction(SAVE_PHOTO)
+export const editModal = myDuck.createAction(EDIT_MODAL)
+export const editContact = myDuck.createAction(EDIT_CONTACTS)
 
 export const getUserThunk = (id) => async dispatch => {
   try {
@@ -66,6 +82,29 @@ export const updateUserStatus = (status) => async dispatch => {
     dispatch(getStatus(status))
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const savePhoto = (photo) => async dispatch => {
+  try {
+    let data = await profileAPI.updatePhoto(photo)
+    if (!data.resultCode) dispatch(setPhoto(data.photos))
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const sendModal = isModal => dispatch => {
+  dispatch(editModal(isModal))
+}
+
+export const updateContacts = (profile) => async dispatch => {
+  try {
+    let data = await profileAPI.updateContacts(profile)
+    dispatch(editModal(false))
+    if (!data.resultCode) dispatch(setUser(profile))
+  } catch (error) {
+    console.log(error);
   }
 }
 

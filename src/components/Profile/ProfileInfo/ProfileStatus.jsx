@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ProfileInfo.module.css";
+import cn from "classnames"
 
 function ProfileStatusWithHook(props) {
   const [editMode, setEditMode] = useState(false)
@@ -11,7 +12,7 @@ function ProfileStatusWithHook(props) {
   }, [props.status])
 
   const toggleModeActivate = () => {
-    setEditMode(!editMode)
+    if (props.isUser) setEditMode(!editMode)
   }
 
   const sendStatus = () => {

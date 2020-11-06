@@ -8,6 +8,9 @@ function LoginPage(props) {
     let errors = {};
     if (!values.emailField) errors.emailField = "Mail must be required";
     if (!values.passwordField) errors.passwordField =  "The password must be required";
+    if (values.captchaField != undefined || values.captchaField != null) {
+      if (!values.captchaField) errors.captchaField =  "The captcha must be required";
+    }
     return errors;
   }
 
@@ -58,6 +61,21 @@ function LoginPage(props) {
                   </div>
                 )}
               </Field>
+              { props.captchaURL ? 
+                <Field name="captchaField">
+                  {({ input, meta }) => (
+                    <div className={ styles.form__input + " " + styles.form__captcha }>
+                      <img src={props.captchaURL} /> 
+                      <input
+                          {...input}
+                          type="text"
+                          placeholder="Input the captcha code..."
+                        />
+                      { meta.error && meta.touched && <span className={styles.error}>{meta.error}</span> }
+                    </div>
+                  )}
+                </Field> : "" 
+              }
               <div className={styles.form__right}>
                 <div className={styles.form__left}>
                   <div className={ styles.checkbox }>

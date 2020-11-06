@@ -1,9 +1,8 @@
-import React, { useEffect, Suspense } from "react";
-import { Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, HashRoute, Route, Switch, Redirect } from "react-router-dom";
 import { initializeApp } from "./redux/app-reducer";
 import { connect } from "react-redux";
 
-import { BrowserRouter } from "react-router-dom";
 import store from "./redux/redux-store";
 import { Provider } from "react-redux";
 import "./App.css";
@@ -25,8 +24,11 @@ const SuperDialogsContainer = React.lazy(() => import("./components/Dialogs/Dial
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
 
 function App(props) {
+  const catchAllUnhandledErrors = (reason, promise) => {}
+
   useEffect(() => {
     props.initializeApp();
+    window.addEventListener("unhandledrejection", catchAllUnhandledErrors)
   }, []);
 
   if (!props.init) return <Loader />;
@@ -39,14 +41,17 @@ function App(props) {
       </div>
       <div className="app-wrapper-content">
         <React.StrictMode>
-          <Route exact path="/" render={() => <Home />} />
-          <Route path="/dialogs" render={() => <WithSuspense Component={SuperDialogsContainer} />} />
-          <Route path="/profile/:id" render={() => <WithSuspense Component={ProfileContainer} />} />
-          <Route path="/settings" render={() => <Settings />} />
-          <Route path="/news" render={() => <News />} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/music" render={() => <Music />} />
-          <Route path="/login" render={() => <WithSuspense Component={LoginContainer} />} />
+          <Switch>
+            <Redirect exact from="/" to="/login" />
+            <Route path="/dialogs" render={() => <WithSuspense Component={SuperDialogsContainer} />} />
+            <Route path="/profile/:id" render={() => <WithSuspense Component={ProfileContainer} />} />
+            <Route path="/settings" render={() => <Settings />} />
+            <Route path="/news" render={() => <News />} />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/music" render={() => <Music />} />
+            <Route path="/login" render={() => <WithSuspense Component={LoginContainer} />} />
+            <Route path="*" render={() => <div>404 The page wasn't found</div>} />
+          </Switch>
         </React.StrictMode>
       </div>
     </div>
