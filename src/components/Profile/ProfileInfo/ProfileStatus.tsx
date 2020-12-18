@@ -1,33 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ProfileInfo.module.css";
-import cn from "classnames"
 
-function ProfileStatusWithHook(props) {
-  const [editMode, setEditMode] = useState(false)
-  const [status, setStatus] = useState(props.status)
-  const statusREF = useRef(null)
+type ProfileStatusType = {
+  status: string,
+  isUser: boolean,
+  updateStatus: (status: string | null) => void
+}
+
+const ProfileStatusWithHook: React.FC<ProfileStatusType> = ({ updateStatus, status, isUser }) => {
+  const [editMode, setEditMode] = useState<boolean>(false)
+  const [newStatus, setStatus] = useState<string>(status)
+  const statusREF = useRef<any | null>(null)
 
   useEffect(() => {
-    setStatus(props.status)
-  }, [props.status])
+    setStatus(status)
+  }, [status])
 
   const toggleModeActivate = () => {
-    if (props.isUser) setEditMode(!editMode)
+    if (isUser) setEditMode(!editMode)
   }
 
   const sendStatus = () => {
-    props.updateStatus(status)
+    updateStatus(newStatus)
     setEditMode(false)
   }
 
-  const inputStatus = (event) => {
+  const inputStatus = (event: any) => {
     setStatus(event.target.value)
   }
 
   let description = (
     <p onDoubleClick={ toggleModeActivate }>The user doesn't complete a status</p>
   );
-  if (props.status) description = <span ref={statusREF} onDoubleClick={ toggleModeActivate }>{props.status}</span>;
+  if (status) description = <span ref={statusREF} onDoubleClick={ toggleModeActivate }>{status}</span>;
 
   return (
     <>
@@ -37,7 +42,7 @@ function ProfileStatusWithHook(props) {
             autoFocus={true}
             type="text"
             onChange={inputStatus}
-            value={status}
+            value={newStatus}
             placeholder="Complete your status..."
           />
           <img

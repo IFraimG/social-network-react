@@ -9,46 +9,45 @@ const configAxios = axios.create({
 })
 
 export const usersAPI = {
-  getPageUsers: async (currentPage, pageSize) => {
+  getPageUsers: async (currentPage: number, pageSize: number) => {
     let res = await configAxios.get(
       `/users?page=${currentPage}&count=${pageSize}`
     )
     return res.data
   },
-  unFollow: (id) => {
+  unFollow: (id: number) => {
     return configAxios.delete(`/follow/${id}`)
   },
-  follow: (id) => {
+  follow: (id: number) => {
     return configAxios.post(`/follow/${id}`, {})
   },
-  getFollowedUsers: async (pageSize) => {
+  getFollowedUsers: async (pageSize: number) => {
     let res = await configAxios.get(`/users?count=${100}&friend=${true}`)
     return res.data
   }
 }
 
 export const profileAPI = {
-  getProfile: async (id) => {
+  getProfile: async (id: number) => {
     let res = await configAxios.get("/profile/" + id)
     return res.data;
   },
-  getStatus: async (id) => {
+  getStatus: async (id: number) => {
     let res = await configAxios.get("/profile/status/" + id)
     return res
   },
-  updateStatus: async (status) => {
+  updateStatus: async (status: string) => {
     let res = await configAxios.put("/profile/status", { status: status })
     return res
   },
-  updatePhoto: async photo => {
+  updatePhoto: async (photo: any) => {
     let formData = new FormData()
     formData.set("image", photo, photo.name)
     let res = await configAxios.put("/profile/photo", formData, { headers: {"Content-Type": "multipart/form-data"}})
     return res.data
   },
-  updateContacts: async (profile) => {
+  updateContacts: async (profile: any) => {
     let res = await configAxios.put("/profile", profile)
-    console.log(res);
     return res.data
   }
 }
@@ -58,9 +57,8 @@ export const authAPI = {
     let res = await configAxios.get("/auth/me")
     return res.data;
   },
-  loginUser: async (email, password, rememberMe = false, captcha) => {
-    let isCaptcha = captcha !== undefined && captcha.length > 0
-    let res = await configAxios.post("/auth/login", {email, password, rememberMe, isCaptcha})
+  loginUser: async (email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) => {
+    let res = await configAxios.post("/auth/login", {email, password, rememberMe, captcha})
     return res.data
   },
   logout: () => {

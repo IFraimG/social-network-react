@@ -13,24 +13,25 @@ import {
   receiveFollowProgress, receiveisAutoLoading, receiveUserSuper, reFindUsersSelector
 } from "../../redux/selectors/users"
 import { compose } from "redux";
+import { AppStateType } from "../../redux/redux-store";
 
-const UsersContainer = props => {
+const UsersContainer = (props: any) => {
   useEffect(() => {
     props.getUsersThunkCreator(props.currentPage, props.pageSize)
   }, [])
 
-  const redirectToPage = (numPage, element) => {
+  const redirectToPage = (numPage: number, element: any) => {
     props.redirectPageThunk(numPage, element, props.pageSize)
   }
 
-  const loadUsersData = (element, pageSize, currentPage) => {
+  const loadUsersData = (element: any, pageSize: number, currentPage: number) => {
     window.scrollBy({ top: element.current.getBoundingClientRect().top, behavior: "smooth" })
     props.loadUsers(pageSize, currentPage)
   }
 
   const loadFullData = () => props.getFullPages()
 
-  let loader = ""
+  let loader: any = ""
   if (props.isLoading) loader = <Loader />
   return (
     <React.Fragment>
@@ -46,7 +47,19 @@ const UsersContainer = props => {
   )
 }
 
-const mapStateToProps = (state) => {
+type mapStateToPropsType = {
+  users: Array<any>,
+  pageSize: number,
+  totalUsersCount: number,
+  currentPage: number,
+  isFull: boolean,
+  isLoading: boolean,
+  isAutoLoading: boolean,
+  followingAtProgress: any,
+  isFollowers: boolean
+}
+
+const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
   return { 
     users: receiveUserSuper(state),
     pageSize: receivePageSize(state),
@@ -66,4 +79,4 @@ export default compose(
     getFullPages, getUsersThunkCreator, redirectPageThunk, 
     toggleFollowing, loadUsers, filterFollowers
   }),
-)(React.memo(UsersContainer));
+)(UsersContainer);
