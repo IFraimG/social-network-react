@@ -121,8 +121,8 @@ export const logoutThunk = () => async (dispatch: any) => {
 }
 
 type loginUserDataType = {
-  emailField: string | undefined,
-  passwordField: string | undefined,
+  emailField: string,
+  passwordField: string,
   rememberMeField: boolean,
   captchaField: string | undefined | null
 }

@@ -85,7 +85,7 @@ type getState = () => AppStateType
 type dispatchType = Dispatch<ActionsTypes>
 type thunkReturnType = ThunkAction<void, AppStateType, unknown, ActionsTypes>
 
-export const getUserThunk = (id: string): thunkReturnType => async (dispatch: dispatchType) => {
+export const getUserThunk = (id: number): thunkReturnType => async (dispatch: dispatchType) => {
   try {
     let data = await profileAPI.getProfile(id)
     dispatch(setUser(data))
@@ -94,7 +94,7 @@ export const getUserThunk = (id: string): thunkReturnType => async (dispatch: di
   }
 }
 
-export const getUserStatus = (id: string): thunkReturnType => async (dispatch: dispatchType) => {
+export const getUserStatus = (id: number): thunkReturnType => async (dispatch: dispatchType) => {
   try {
     let res = await profileAPI.getStatus(id)
     dispatch(getStatus(res.data))
